@@ -45,65 +45,69 @@ public class ArchivosXML {
     public void generarDocumento() {
         Element element = document.createElement("imagenes");
         document.appendChild(element);
+        
         Element nombre = document.createElement("apple");
         element.appendChild(nombre);
-        nombre.setAttribute("Direccion", "\\icon\\apple.png");
+        nombre.setAttribute("id", "1");
+        Element direccion = document.createElement("direccion");
+        direccion.appendChild(document.createTextNode("\\icon\\apple.png"));
+        nombre.appendChild(direccion);
         
         nombre = document.createElement("chrome");
         element.appendChild(nombre);
-        nombre.setAttribute("Direccion", "\\icon\\chrome.png");
+        nombre.setAttribute("id", "2");
         
         nombre = document.createElement("facebook");
         element.appendChild(nombre);
-        nombre.setAttribute("Direccion", "\\icon\\facebook.png");
+        nombre.setAttribute("id", "3");
         
         nombre = document.createElement("google");
         element.appendChild(nombre);
-        nombre.setAttribute("Direccion", "\\icon\\google.png");
+        nombre.setAttribute("id", "4");
         
         nombre = document.createElement("googlePlay");
         element.appendChild(nombre);
-        nombre.setAttribute("Direccion", "\\icon\\googlePlay.png");
+        nombre.setAttribute("id", "5");
         
         nombre = document.createElement("hp");
         element.appendChild(nombre);
-        nombre.setAttribute("Direccion", "\\icon\\hp.png");
+        nombre.setAttribute("id", "6");
         
         nombre = document.createElement("instagram");
         element.appendChild(nombre);
-        nombre.setAttribute("Direccion", "\\icon\\instagram.png");
+        nombre.setAttribute("id", "7");
        
         nombre = document.createElement("internetExplorer");
         element.appendChild(nombre);
-        nombre.setAttribute("Direccion", "\\icon\\internetExplorer.png");
+        nombre.setAttribute("id", "8");
         
         nombre = document.createElement("messenger");
         element.appendChild(nombre);
-        nombre.setAttribute("Direccion", "\\icon\\messenger.png");
+        nombre.setAttribute("id", "9");
         
         nombre = document.createElement("microsoft");
         element.appendChild(nombre);
-        nombre.setAttribute("Direccion", "\\icon\\microsoft.png");
+        nombre.setAttribute("id", "10");
         
         nombre = document.createElement("playStation");
         element.appendChild(nombre);
-        nombre.setAttribute("Direccion", "\\icon\\playStation.png");
+        nombre.setAttribute("id", "11");
         
         nombre = document.createElement("telegram");
         element.appendChild(nombre);
-        nombre.setAttribute("Direccion", "\\icon\\telegram.png");
+        nombre.setAttribute("id", "12");
         
         nombre = document.createElement("twitter");
         element.appendChild(nombre);
-        nombre.setAttribute("Direccion", "\\icon\\twitter.png");
+        nombre.setAttribute("id", "13");
         
         nombre = document.createElement("whatsapp");
         element.appendChild(nombre);
-        nombre.setAttribute("Direccion", "\\icon\\whatsapp.png");
-        
+       nombre.setAttribute("id", "14");
+       
         nombre = document.createElement("youTube");
         element.appendChild(nombre);
-        nombre.setAttribute("Direccion", "\\icon\\youTube.png");
+        nombre.setAttribute("id", "15");
     }
     
     public void generarXml() throws TransformerConfigurationException, IOException, TransformerException{
@@ -120,32 +124,30 @@ public class ArchivosXML {
     }
     
     public void leerXml() throws Exception{
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        Document document = builder.parse("imagenes.xml");
         
-        elementoRaiz=  document.getDocumentElement();
-        
-        NodeList listaImagenes = elementoRaiz.getElementsByTagName("imagenes");
-        
-        for (int i = 0; i < listaImagenes.getLength(); i++) {
-            Node imagen = listaImagenes.item(i);
-            System.out.println("Imagen"+1);
+      try {
+         File inputFile = new File("imagenes.xml");
+         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+         Document doc = dBuilder.parse(inputFile);
+         doc.getDocumentElement().normalize();
+         System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+         NodeList nList = doc.getElementsByTagName("imagenes");
+         System.out.println("----------------------------");
+         
+         for (int temp = 0; temp < nList.getLength(); temp++) {
+            Node nNode = nList.item(temp);
+            System.out.println("\nCurrent Element :" + nNode.getChildNodes().item(temp).getNodeName());
             
-            NodeList datosImagenes = imagen.getChildNodes();
-            for (int j = 0; j < datosImagenes.getLength(); j++) {
-                Node datos = datosImagenes.item(j);
-                if (datos.getNodeType() == Node.ELEMENT_NODE) {
-                    System.out.println(datos.getLocalName());
-                    
-                }
-                Node contenido = datos.getFirstChild();
-                if (contenido !=null) {
-                    System.out.println(" "+contenido.getNodeValue());
-                    
-                }
+            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+               Element eElement = (Element) nNode;
+               System.out.println("direccion : " 
+                  + eElement.getAttribute(""+eElement.getAttribute("direccion")));
+               
             }
-            System.out.println("");
-        }
+         }
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
     }
 }

@@ -1,1 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><imagenes><apple Direccion="\icon\apple.png"/><chrome Direccion="\icon\chrome.png"/><facebook Direccion="\icon\facebook.png"/><google Direccion="\icon\google.png"/><googlePlay Direccion="\icon\googlePlay.png"/><hp Direccion="\icon\hp.png"/><instagram Direccion="\icon\instagram.png"/><internetExplorer Direccion="\icon\internetExplorer.png"/><messenger Direccion="\icon\messenger.png"/><microsoft Direccion="\icon\microsoft.png"/><playStation Direccion="\icon\playStation.png"/><telegram Direccion="\icon\telegram.png"/><twitter Direccion="\icon\twitter.png"/><whatsapp Direccion="\icon\whatsapp.png"/><youTube Direccion="\icon\youTube.png"/></imagenes>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><imagenes>
+    <apple id="1">
+        <direccion>\icon\apple.png</direccion>
+    </apple>
+    <chrome id="2"/>
+    <facebook id="3"/>
+    <google id="4"/>
+    <googlePlay id="5"/>
+    <hp id="6"/>
+    <instagram id="7"/>
+    <internetExplorer id="8"/>
+    <messenger id="9"/>
+    <microsoft id="10"/>
+    <playStation id="11"/>
+    <telegram id="12"/>
+    <twitter id="13"/>
+    <whatsapp id="14"/>
+    <youTube id="15"/>
+</imagenes>
