@@ -5,11 +5,13 @@
  */
 package proyecto2Progra2;
 
+import archivos.ArchivosXML;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javax.xml.parsers.ParserConfigurationException;
 
 /**
  *
@@ -30,8 +32,12 @@ public class P extends Application {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        launch(args);
+    public static void main(String[] args) throws Exception {
+//        launch(args);
+        ArchivosXML archivos = new ArchivosXML();
+        archivos.generarDocumento();
+        archivos.generarXml();
+        archivos.leerXml();
     }
     
 }
