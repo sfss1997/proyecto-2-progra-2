@@ -20,6 +20,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -27,6 +28,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javax.xml.parsers.ParserConfigurationException;
 
 /**
@@ -49,13 +51,20 @@ public class SpriteController implements Initializable {
     private ImageView pruebaImagen;
     
     private ArchivosXML archivos;
+    @FXML
+    private VBox iconsVBox;
+    @FXML
+    private MenuItem deleteMenuItem;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
             // TODO
             archivos = new ArchivosXML();
+            setVBox();
         } catch (ParserConfigurationException ex) {
+            Logger.getLogger(SpriteController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(SpriteController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }    
@@ -99,9 +108,19 @@ public class SpriteController implements Initializable {
         spriteAnchorPane.setPrefWidth(pane.getPrefWidth());
         spriteAnchorPane.getChildren().add(pane);
         
-        Image img = new Image(archivos.leerXml().get(3).getDireccion());
-        pruebaImagen.setImage(img);
-        
+    }
+    
+    private void setVBox() throws Exception{
+        for (int i = 0; i < archivos.leerXml().size(); i++) {
+            Image img = new Image(archivos.leerXml().get(i).getDireccion());
+            ImageView imageView = new ImageView(img);
+            iconsVBox.getChildren().add(imageView);
+        }
+    }
+
+    @FXML
+    private void deleteOnAction(ActionEvent event) {
+        spriteAnchorPane.getChildren().clear();
     }
 
     
