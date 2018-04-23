@@ -12,6 +12,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javax.xml.parsers.ParserConfigurationException;
+import Domain.Imagenes;
+import java.util.LinkedList;
 
 /**
  *
@@ -27,18 +29,24 @@ public class P extends Application {
         
         stage.setScene(scene);
         stage.show();
+        
+        
     }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        launch(args);
+        
+        ArchivosXML arc = new ArchivosXML();
+        LinkedList list = new LinkedList();
+        list.add(arc.leerXml().get(0));
+        System.out.println(list.get(0));
         ArchivosXML archivos = new ArchivosXML();
         archivos.generarDocumento();
         archivos.generarXml();
         
-        
+        launch(args);
     }
     
 }
