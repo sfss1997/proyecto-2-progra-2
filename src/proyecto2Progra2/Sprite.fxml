@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="431.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto2Progra2.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="431.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto2Progra2.SpriteController">
    <children>
       <VBox prefHeight="431.0" prefWidth="624.0">
          <children>
@@ -38,7 +40,10 @@
                       <AnchorPane fx:id="spriteAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="262.0" prefWidth="317.0" />
                     </content>
                   </ScrollPane>
-                  <Button layoutX="106.0" layoutY="320.0" mnemonicParsing="false" onAction="#add" text="Button" />
+                  <Button layoutX="42.0" layoutY="322.0" mnemonicParsing="false" onAction="#add" text="Size" />
+                  <TextField fx:id="rows" layoutX="86.0" layoutY="322.0" prefHeight="25.0" prefWidth="37.0" />
+                  <Label layoutX="130.0" layoutY="326.0" text="x" />
+                  <TextField fx:id="columns" layoutX="144.0" layoutY="322.0" prefHeight="25.0" prefWidth="37.0" />
                </children>
             </AnchorPane>
          </children>
