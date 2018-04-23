@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -212,8 +213,8 @@ public class ArchivosXML {
         transformer.transform(source, result);
     }
     
-    public LinkedList leerXml() throws Exception{
-        LinkedList listaImagenes = new LinkedList();
+    public ArrayList<Imagenes> leerXml() throws Exception{
+        ArrayList<Imagenes> listaImagenes = new ArrayList<>();
       try {
             File archivo = new File("imagenes.xml");
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -235,7 +236,6 @@ public class ArchivosXML {
                     imagenes.setNombre(element.getElementsByTagName("nombre").item(0).getTextContent());
                     imagenes.setDireccion(element.getElementsByTagName("direccion").item(0).getTextContent());
                     listaImagenes.add(imagenes);
-                    
                 }
             }
         } catch (Exception e) {

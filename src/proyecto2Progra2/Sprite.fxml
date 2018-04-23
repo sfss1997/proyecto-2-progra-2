@@ -7,6 +7,7 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -44,6 +45,7 @@
                   <TextField fx:id="rows" layoutX="86.0" layoutY="322.0" prefHeight="25.0" prefWidth="37.0" />
                   <Label layoutX="130.0" layoutY="326.0" text="x" />
                   <TextField fx:id="columns" layoutX="144.0" layoutY="322.0" prefHeight="25.0" prefWidth="37.0" />
+                  <ImageView fx:id="pruebaImagen" fitHeight="150.0" fitWidth="200.0" layoutX="348.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
          </children>

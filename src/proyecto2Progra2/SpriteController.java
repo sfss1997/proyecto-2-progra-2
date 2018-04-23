@@ -5,6 +5,7 @@
  */
 package proyecto2Progra2;
 
+import archivos.ArchivosXML;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -43,6 +44,10 @@ public class SpriteController implements Initializable {
     private TextField rows;
     @FXML
     private TextField columns;
+    @FXML
+    private ImageView pruebaImagen;
+    
+    private ArchivosXML archivos;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -50,7 +55,7 @@ public class SpriteController implements Initializable {
     }    
 
     @FXML
-    public void add(ActionEvent event) {
+    public void add(ActionEvent event) throws Exception {
         spriteAnchorPane.getChildren().clear();
         cell = new Cell[Integer.parseInt(rows.getText())][Integer.parseInt(columns.getText())];
         pane = new GridPane();
@@ -87,6 +92,9 @@ public class SpriteController implements Initializable {
         spriteAnchorPane.setPrefHeight(pane.getPrefHeight());
         spriteAnchorPane.setPrefWidth(pane.getPrefWidth());
         spriteAnchorPane.getChildren().add(pane);
+        
+        Image img = new Image("icon/apple.png");
+        pruebaImagen.setImage(img);
         
     }
 
