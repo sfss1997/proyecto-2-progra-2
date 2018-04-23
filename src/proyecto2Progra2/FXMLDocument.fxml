@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="431.0" prefWidth="624.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="p.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="431.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto2Progra2.FXMLDocumentController">
    <children>
       <VBox prefHeight="431.0" prefWidth="624.0">
          <children>
@@ -35,7 +35,7 @@
                <children>
                   <ScrollPane layoutX="14.0" layoutY="14.0" prefHeight="262.0" prefWidth="318.0">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="262.0" prefWidth="317.0" />
+                      <AnchorPane fx:id="spriteAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="262.0" prefWidth="317.0" />
                     </content>
                   </ScrollPane>
                   <Button layoutX="106.0" layoutY="320.0" mnemonicParsing="false" onAction="#add" text="Button" />
