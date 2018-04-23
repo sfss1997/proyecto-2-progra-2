@@ -5,6 +5,17 @@
  */
 package proyecto2Progra2;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.EventHandler;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 
@@ -14,18 +25,39 @@ import javafx.scene.shape.Line;
  */
 public class Cell extends Pane {
 
+    private ImageView imageView;
+    
     public Cell() {
         setStyle("-fx-border-color : black");
         this.setPrefSize(100, 100);
-        this.setOnMouseClicked(e -> handleClick());
-    }
-
-    private void handleClick() {
-        Line line1 = new Line(10, this.getHeight() - 10, this.getWidth() - 10, 10);
-        line1.endXProperty().bind(this.widthProperty().subtract(10));
-        line1.endYProperty().bind(this.heightProperty().subtract(10));
+        this.imageView = new ImageView();
         
-        getChildren().addAll(line1);
+        imageView.setOnDragOver(new EventHandler<DragEvent>() {
+            @Override
+            public void handle(DragEvent event) {
+                if (event.getDragboard().hasFiles()) {
+                    event.acceptTransferModes(TransferMode.ANY);
+                }
+            }
+        });
+        imageView.setOnDragDropped(new EventHandler<DragEvent>() {
+            @Override
+            public void handle(DragEvent event) {
+                try {
+                    List<File> files = event.getDragboard().getFiles();
+                    Image img = new Image(new FileInputStream(files.get(0)));
+                    imageView.setImage(img);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(Cell.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+
+        this.getChildren().add(imageView);
+    }
+    
+    public ImageView getImageView(){
+        return this.imageView;
     }
 
 }
