@@ -27,6 +27,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javax.xml.parsers.ParserConfigurationException;
 
 /**
  *
@@ -51,7 +52,12 @@ public class SpriteController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        try {
+            // TODO
+            archivos = new ArchivosXML();
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(SpriteController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }    
 
     @FXML
@@ -93,8 +99,7 @@ public class SpriteController implements Initializable {
         spriteAnchorPane.setPrefWidth(pane.getPrefWidth());
         spriteAnchorPane.getChildren().add(pane);
         
-        Image img = new Image("icon/apple.png");
-        System.out.println();
+        Image img = new Image(archivos.leerXml().get(3).getDireccion());
         pruebaImagen.setImage(img);
         
     }
