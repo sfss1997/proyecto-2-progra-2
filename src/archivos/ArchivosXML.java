@@ -245,9 +245,9 @@ public class ArchivosXML {
                 System.out.println("Elemento:" + nodo.getNodeName());
                 if (nodo.getNodeType() == Node.ELEMENT_NODE) {
                     Element element = (Element) nodo;
-                    System.out.println("id: " + element.getAttribute("id"));
-                    System.out.println("Nombre: " + element.getElementsByTagName("nombre").item(0).getTextContent());
-                    System.out.println("Direccion: " + element.getElementsByTagName("direccion").item(0).getTextContent()+"\n\n");
+//                    System.out.println("id: " + element.getAttribute("id"));
+//                    System.out.println("Nombre: " + element.getElementsByTagName("nombre").item(0).getTextContent());
+//                    System.out.println("Direccion: " + element.getElementsByTagName("direccion").item(0).getTextContent()+"\n\n");
                     Imagenes imagenes = new Imagenes();
                     imagenes.setId(Integer.parseInt(element.getAttribute("id")));
                     imagenes.setNombre((element.getElementsByTagName("nombre").item(0).getTextContent()).toString());
