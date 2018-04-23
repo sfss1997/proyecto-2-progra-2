@@ -94,6 +94,7 @@ public class SpriteController implements Initializable {
         spriteAnchorPane.getChildren().add(pane);
         
         Image img = new Image("icon/apple.png");
+        System.out.println();
         pruebaImagen.setImage(img);
         
     }

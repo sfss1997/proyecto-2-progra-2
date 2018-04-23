@@ -38,10 +38,9 @@ public class P extends Application {
      */
     public static void main(String[] args) throws Exception {
         
-        ArchivosXML arc = new ArchivosXML();
-        LinkedList list = new LinkedList();
-        list.add(arc.leerXml().get(0));
-        System.out.println(list.get(0));
+        
+       
+        
         ArchivosXML archivos = new ArchivosXML();
         archivos.generarDocumento();
         archivos.generarXml();

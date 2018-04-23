@@ -233,8 +233,8 @@ public class ArchivosXML {
                     System.out.println("Direccion: " + element.getElementsByTagName("direccion").item(0).getTextContent()+"\n\n");
                     Imagenes imagenes = new Imagenes();
                     imagenes.setId(Integer.parseInt(element.getAttribute("id")));
-                    imagenes.setNombre(element.getElementsByTagName("nombre").item(0).getTextContent());
-                    imagenes.setDireccion(element.getElementsByTagName("direccion").item(0).getTextContent());
+                    imagenes.setNombre((element.getElementsByTagName("nombre").item(0).getTextContent()).toString());
+                    imagenes.setDireccion((element.getElementsByTagName("direccion").item(0).getTextContent()).toString());
                     listaImagenes.add(imagenes);
                 }
             }
