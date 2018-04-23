@@ -235,6 +235,7 @@ public class ArchivosXML {
                     imagenes.setNombre(element.getElementsByTagName("nombre").item(0).getTextContent());
                     imagenes.setDireccion(element.getElementsByTagName("direccion").item(0).getTextContent());
                     listaImagenes.add(imagenes);
+                    
                 }
             }
         } catch (Exception e) {

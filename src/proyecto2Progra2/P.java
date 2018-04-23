@@ -38,6 +38,7 @@ public class P extends Application {
         archivos.generarDocumento();
         archivos.generarXml();
         
+        
     }
     
 }
