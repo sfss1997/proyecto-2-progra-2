@@ -44,7 +44,7 @@ public class P extends Application {
         ArchivosXML archivos = new ArchivosXML();
         archivos.generarDocumento();
         archivos.generarXml();
-        
+        archivos.leerXml();
         launch(args);
     }
     
