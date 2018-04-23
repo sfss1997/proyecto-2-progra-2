@@ -49,65 +49,107 @@ public class ArchivosXML {
         Element nombre = document.createElement("apple");
         element.appendChild(nombre);
         nombre.setAttribute("id", "1");
-        Element direccion = document.createElement("direccion");
-        direccion.appendChild(document.createTextNode("\\icon\\apple.png"));
-        nombre.appendChild(direccion);
+        Element direccion1 = document.createElement("direccion");
+        direccion1.appendChild(document.createTextNode("\\icon\\apple.png"));
+        nombre.appendChild(direccion1);
         
         nombre = document.createElement("chrome");
         element.appendChild(nombre);
         nombre.setAttribute("id", "2");
+        Element direccion2 = document.createElement("direccion");
+        direccion2.appendChild(document.createTextNode("\\icon\\chrome.png"));
+        nombre.appendChild(direccion2);
         
         nombre = document.createElement("facebook");
         element.appendChild(nombre);
         nombre.setAttribute("id", "3");
+        Element direccion3 = document.createElement("direccion");
+        direccion3.appendChild(document.createTextNode("\\icon\\facebook.png"));
+        nombre.appendChild(direccion3);
         
         nombre = document.createElement("google");
         element.appendChild(nombre);
         nombre.setAttribute("id", "4");
+        Element direccion4 = document.createElement("direccion");
+        direccion4.appendChild(document.createTextNode("\\icon\\google.png"));
+        nombre.appendChild(direccion4);
         
         nombre = document.createElement("googlePlay");
         element.appendChild(nombre);
         nombre.setAttribute("id", "5");
+        Element direccion5 = document.createElement("direccion");
+        direccion5.appendChild(document.createTextNode("\\icon\\googlePlay.png"));
+        nombre.appendChild(direccion5);
         
         nombre = document.createElement("hp");
         element.appendChild(nombre);
         nombre.setAttribute("id", "6");
+        Element direccion6 = document.createElement("direccion");
+        direccion6.appendChild(document.createTextNode("\\icon\\hp.png"));
+        nombre.appendChild(direccion6);
         
         nombre = document.createElement("instagram");
         element.appendChild(nombre);
         nombre.setAttribute("id", "7");
+        Element direccion7 = document.createElement("direccion");
+        direccion7.appendChild(document.createTextNode("\\icon\\instagram.png"));
+        nombre.appendChild(direccion7);
        
         nombre = document.createElement("internetExplorer");
         element.appendChild(nombre);
         nombre.setAttribute("id", "8");
+        Element direccion8 = document.createElement("direccion");
+        direccion8.appendChild(document.createTextNode("\\icon\\internetExplorer.png"));
+        nombre.appendChild(direccion8);
         
         nombre = document.createElement("messenger");
         element.appendChild(nombre);
         nombre.setAttribute("id", "9");
+        Element direccion9 = document.createElement("direccion");
+        direccion9.appendChild(document.createTextNode("\\icon\\messenger.png"));
+        nombre.appendChild(direccion9);
         
         nombre = document.createElement("microsoft");
         element.appendChild(nombre);
         nombre.setAttribute("id", "10");
+        Element direccion10 = document.createElement("direccion");
+        direccion10.appendChild(document.createTextNode("\\icon\\microsoft.png"));
+        nombre.appendChild(direccion10);
         
         nombre = document.createElement("playStation");
         element.appendChild(nombre);
         nombre.setAttribute("id", "11");
+        Element direccion11 = document.createElement("direccion");
+        direccion11.appendChild(document.createTextNode("\\icon\\playStation.png"));
+        nombre.appendChild(direccion11);
         
         nombre = document.createElement("telegram");
         element.appendChild(nombre);
         nombre.setAttribute("id", "12");
+        Element direccion12 = document.createElement("direccion");
+        direccion12.appendChild(document.createTextNode("\\icon\\telegram.png"));
+        nombre.appendChild(direccion12);
         
         nombre = document.createElement("twitter");
         element.appendChild(nombre);
         nombre.setAttribute("id", "13");
+        Element direccion13 = document.createElement("direccion");
+        direccion13.appendChild(document.createTextNode("\\icon\\twitter.png"));
+        nombre.appendChild(direccion13);
         
         nombre = document.createElement("whatsapp");
         element.appendChild(nombre);
        nombre.setAttribute("id", "14");
+       Element direccion14 = document.createElement("direccion");
+       direccion14.appendChild(document.createTextNode("\\icon\\whatsapp.png"));
+        nombre.appendChild(direccion14);
        
         nombre = document.createElement("youTube");
         element.appendChild(nombre);
         nombre.setAttribute("id", "15");
+        Element direccion15 = document.createElement("direccion");
+        direccion15.appendChild(document.createTextNode("\\icon\\youTube.png"));
+        nombre.appendChild(direccion15);
     }
     
     public void generarXml() throws TransformerConfigurationException, IOException, TransformerException{

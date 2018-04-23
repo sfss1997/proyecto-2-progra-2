@@ -2,18 +2,46 @@
     <apple id="1">
         <direccion>\icon\apple.png</direccion>
     </apple>
-    <chrome id="2"/>
-    <facebook id="3"/>
-    <google id="4"/>
-    <googlePlay id="5"/>
-    <hp id="6"/>
-    <instagram id="7"/>
-    <internetExplorer id="8"/>
-    <messenger id="9"/>
-    <microsoft id="10"/>
-    <playStation id="11"/>
-    <telegram id="12"/>
-    <twitter id="13"/>
-    <whatsapp id="14"/>
-    <youTube id="15"/>
+    <chrome id="2">
+        <direccion>\icon\chrome.png</direccion>
+    </chrome>
+    <facebook id="3">
+        <direccion>\icon\facebook.png</direccion>
+    </facebook>
+    <google id="4">
+        <direccion>\icon\google.png</direccion>
+    </google>
+    <googlePlay id="5">
+        <direccion>\icon\googlePlay.png</direccion>
+    </googlePlay>
+    <hp id="6">
+        <direccion>\icon\hp.png</direccion>
+    </hp>
+    <instagram id="7">
+        <direccion>\icon\instagram.png</direccion>
+    </instagram>
+    <internetExplorer id="8">
+        <direccion>\icon\internetExplorer.png</direccion>
+    </internetExplorer>
+    <messenger id="9">
+        <direccion>\icon\messenger.png</direccion>
+    </messenger>
+    <microsoft id="10">
+        <direccion>\icon\microsoft.png</direccion>
+    </microsoft>
+    <playStation id="11">
+        <direccion>\icon\playStation.png</direccion>
+    </playStation>
+    <telegram id="12">
+        <direccion>\icon\telegram.png</direccion>
+    </telegram>
+    <twitter id="13">
+        <direccion>\icon\twitter.png</direccion>
+    </twitter>
+    <whatsapp id="14">
+        <direccion>\icon\whatsapp.png</direccion>
+    </whatsapp>
+    <youTube id="15">
+        <direccion>\icon\youTube.png</direccion>
+    </youTube>
 </imagenes>
