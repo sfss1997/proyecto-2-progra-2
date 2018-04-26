@@ -58,6 +58,7 @@
                            </padding></VBox>
                      </content>
                   </ScrollPane>
+                  <Button fx:id="export" layoutX="506.0" layoutY="367.0" mnemonicParsing="false" onAction="#exportAsImage" text="Export as image" />
                </children>
             </AnchorPane>
          </children>
