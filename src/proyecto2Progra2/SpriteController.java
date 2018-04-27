@@ -20,7 +20,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
@@ -33,6 +35,7 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
@@ -141,7 +144,6 @@ public class SpriteController implements Initializable {
                 db.setContent(content);
 
 //                auxImageView = source;
-
                 event.consume();
             }
         });
@@ -205,8 +207,13 @@ public class SpriteController implements Initializable {
         });
 
     }
+
+    @FXML
     public void exportAsImage() {
+
+        changeCellStyle("none");
         WritableImage image = spriteAnchorPane.snapshot(new SnapshotParameters(), null);
+        changeCellStyle("black");
         // TODO: probably use a file chooser here
        
         
@@ -219,8 +226,26 @@ public class SpriteController implements Initializable {
         guardarImagen.setVisible(false);
         try {
             ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
+            
         } catch (IOException e) {
             // TODO: handle exception here
+        }
+
+    }
+    
+    private void changeCellStyle(String color){
+        for (int i = 0; i < Integer.parseInt(rows.getText()); i++) {
+            for (int j = 0; j < Integer.parseInt(columns.getText()); j++) {
+                cell[i][j].setStyle("-fx-border-color : " + color);
+            }
+        }
+    }
+
+    @FXML
+    private void validateOnKeyTyped(KeyEvent event) {
+        char charType = event.getCharacter().charAt(0);
+        if (!Character.isDigit(charType)) {
+            event.consume();
         }
     }
 
