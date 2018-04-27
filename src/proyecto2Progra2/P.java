@@ -58,8 +58,9 @@ public class P extends Application {
         x.add("200");
         y.add("300");
         y.add("400");
-        
-        archivosJSON.escribirJson("pedro", url, x, y);
+        int ancho = 2;
+        int largo = 2;
+        archivosJSON.escribirJson("pedro", url, x, y, ancho, largo);
         
       
         

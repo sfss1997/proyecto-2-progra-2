@@ -40,6 +40,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileSystemView;
+
 import javax.xml.parsers.ParserConfigurationException;
 
 /**
@@ -205,7 +208,15 @@ public class SpriteController implements Initializable {
     public void exportAsImage() {
         WritableImage image = spriteAnchorPane.snapshot(new SnapshotParameters(), null);
         // TODO: probably use a file chooser here
-        File file = new File("sprite.png");
+       
+        
+        JFileChooser guardarImagen = new JFileChooser();
+        guardarImagen.setApproveButtonText("Guardar");
+        guardarImagen.showSaveDialog(null);
+        
+        
+        File file = new File(guardarImagen.getSelectedFile()+".png");
+        guardarImagen.setVisible(false);
         try {
             ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
         } catch (IOException e) {

@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFileChooser;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -18,7 +19,7 @@ import org.json.simple.JSONObject;
  */
 public class ArchivosJSON {
 
-    public void escribirJson(String usuario,ArrayList url,ArrayList x,ArrayList y) {
+    public void escribirJson(String usuario,ArrayList url,ArrayList x,ArrayList y, int ancho, int largo) {
         JSONObject obj = new JSONObject();
         
         
@@ -34,12 +35,17 @@ public class ArchivosJSON {
         }
         
         obj.put("usuario", usuario);
+        obj.put("ancho",ancho);
+        obj.put("alto",largo);
         obj.put("url", listUrl);
         obj.put("x", listX);
         obj.put("y", listY);
         
         try {
-            FileWriter file = new FileWriter("datos.json");
+            JFileChooser guardarImagen = new JFileChooser();
+            guardarImagen.setApproveButtonText("Guardar");
+            guardarImagen.showSaveDialog(null);
+            FileWriter file = new FileWriter(guardarImagen.getSelectedFile()+".json");
             file.write(obj.toJSONString());
             file.flush();
             file.close();
