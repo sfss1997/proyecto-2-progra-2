@@ -21,8 +21,8 @@
                 <Menu mnemonicParsing="false" text="File">
                   <items>
                     <MenuItem mnemonicParsing="false" text="New project" />
-                        <MenuItem mnemonicParsing="false" text="Open project" />
-                        <MenuItem mnemonicParsing="false" text="Save" />
+                        <MenuItem mnemonicParsing="false" onAction="#openProjectOnAction" text="Open project" />
+                        <MenuItem mnemonicParsing="false" onAction="#saveProgressOnAction" text="Save" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#exportAsImage" text="Export as image" />
                         <SeparatorMenuItem mnemonicParsing="false" />
@@ -49,9 +49,9 @@
                     </content>
                   </ScrollPane>
                   <Button layoutX="392.0" layoutY="321.0" mnemonicParsing="false" onAction="#add" text="Size" />
-                  <TextField fx:id="rows" layoutX="436.0" layoutY="321.0" onKeyTyped="#validateOnKeyTyped" prefHeight="25.0" prefWidth="37.0" />
+                  <TextField fx:id="rowsTextField" layoutX="436.0" layoutY="321.0" onKeyTyped="#validateOnKeyTyped" prefHeight="25.0" prefWidth="37.0" />
                   <Label layoutX="480.0" layoutY="325.0" text="x" />
-                  <TextField fx:id="columns" layoutX="494.0" layoutY="321.0" onKeyTyped="#validateOnKeyTyped" prefHeight="25.0" prefWidth="37.0" />
+                  <TextField fx:id="columnsTextField" layoutX="494.0" layoutY="321.0" onKeyTyped="#validateOnKeyTyped" prefHeight="25.0" prefWidth="37.0" />
                   <ScrollPane prefHeight="406.0" prefWidth="137.0">
                      <content>
                         <VBox fx:id="iconsVBox" prefHeight="457.0" prefWidth="122.0" spacing="10.0">

@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -61,9 +62,9 @@ public class SpriteController implements Initializable {
     private Cell[][] cell;
     private GridPane pane;
     @FXML
-    private TextField rows;
+    private TextField rowsTextField;
     @FXML
-    private TextField columns;
+    private TextField columnsTextField;
 
     private ArchivosXML archivos;
     @FXML
@@ -75,11 +76,21 @@ public class SpriteController implements Initializable {
     private ImageView auxImageView;
     private int curseur;
 
+    private int rows;
+    private int columns;
+
+    private ArrayList<String> url;
+    private ArrayList<String> x;
+    private ArrayList<String> y;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
             // TODO
             archivos = new ArchivosXML();
+            this.url = new ArrayList<>();
+            this.x = new ArrayList<>();
+            this.y = new ArrayList<>();
             setVBox();
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(SpriteController.class.getName()).log(Level.SEVERE, null, ex);
@@ -91,11 +102,13 @@ public class SpriteController implements Initializable {
     @FXML
     public void add(ActionEvent event) throws Exception {
         spriteAnchorPane.getChildren().clear();
-        cell = new Cell[Integer.parseInt(rows.getText())][Integer.parseInt(columns.getText())];
+        this.rows = Integer.parseInt(rowsTextField.getText());
+        this.columns = Integer.parseInt(columnsTextField.getText());
+        cell = new Cell[this.rows][this.columns];
         pane = new GridPane();
 
-        for (int i = 0; i < Integer.parseInt(rows.getText()); i++) {
-            for (int j = 0; j < Integer.parseInt(columns.getText()); j++) {
+        for (int i = 0; i < Integer.parseInt(rowsTextField.getText()); i++) {
+            for (int j = 0; j < Integer.parseInt(columnsTextField.getText()); j++) {
                 cell[i][j] = new Cell();
                 pane.add(cell[i][j], j, i);
             }
@@ -215,27 +228,25 @@ public class SpriteController implements Initializable {
         WritableImage image = spriteAnchorPane.snapshot(new SnapshotParameters(), null);
         changeCellStyle("black");
         // TODO: probably use a file chooser here
-       
-        
+
         JFileChooser guardarImagen = new JFileChooser();
         guardarImagen.setApproveButtonText("Guardar");
         guardarImagen.showSaveDialog(null);
-        
-        
-        File file = new File(guardarImagen.getSelectedFile()+".png");
+
+        File file = new File(guardarImagen.getSelectedFile() + ".png");
         guardarImagen.setVisible(false);
         try {
             ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
-            
+
         } catch (IOException e) {
             // TODO: handle exception here
         }
 
     }
-    
-    private void changeCellStyle(String color){
-        for (int i = 0; i < Integer.parseInt(rows.getText()); i++) {
-            for (int j = 0; j < Integer.parseInt(columns.getText()); j++) {
+
+    private void changeCellStyle(String color) {
+        for (int i = 0; i < Integer.parseInt(rowsTextField.getText()); i++) {
+            for (int j = 0; j < Integer.parseInt(columnsTextField.getText()); j++) {
                 cell[i][j].setStyle("-fx-border-color : " + color);
             }
         }
@@ -247,6 +258,14 @@ public class SpriteController implements Initializable {
         if (!Character.isDigit(charType)) {
             event.consume();
         }
+    }
+
+    @FXML
+    private void openProjectOnAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void saveProgressOnAction(ActionEvent event) {
     }
 
 }
