@@ -5,19 +5,12 @@
  */
 package proyecto2Progra2;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.List;
+import archivos.ArchivosXML;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.event.EventHandler;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Line;
+import javax.xml.parsers.ParserConfigurationException;
 
 /**
  *
@@ -26,16 +19,61 @@ import javafx.scene.shape.Line;
 public class Cell extends Pane {
 
     private ImageView imageView;
+    private SpriteController spriteController;
+    private ArchivosXML archivosXML;
+    private int row;
+    private int column;
+    private String name;
     
     public Cell() {
-        setStyle("-fx-border-color : black");
-        this.setPrefSize(100, 100);
-        this.imageView = new ImageView();
-        this.setOnMouseClicked(e -> handleClick());
+        try {
+            setStyle("-fx-border-color : black");
+            this.setPrefSize(100, 100);
+            this.setOnMouseClicked(e -> handleClick());
+            this.spriteController = new SpriteController();
+            this.archivosXML = new ArchivosXML();
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(Cell.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void handleClick() {
-        this.getChildren().add(new ImageView("icon/chrome.png"));
+        try {
+            String selectedItem = spriteController.getSelectedItemFromListView();
+            if(!selectedItem.equals("")){
+                for (int i = 0; i < archivosXML.leerXml().size(); i++) {
+                    if(archivosXML.leerXml().get(i).getNombre().equals(selectedItem)){
+                        this.getChildren().add(new ImageView(archivosXML.leerXml().get(i).getDireccion()));
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Cell.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public void setColumn(int column) {
+        this.column = column;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
 }

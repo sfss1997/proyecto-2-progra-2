@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -48,18 +48,12 @@
                       <AnchorPane fx:id="spriteAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="262.0" prefWidth="317.0" />
                     </content>
                   </ScrollPane>
-                  <Button layoutX="392.0" layoutY="321.0" mnemonicParsing="false" onAction="#add" text="Size" />
+                  <Button layoutX="392.0" layoutY="321.0" mnemonicParsing="false" onAction="#createGridPane" text="Size" />
                   <TextField fx:id="rowsTextField" layoutX="436.0" layoutY="321.0" onKeyTyped="#validateOnKeyTyped" prefHeight="25.0" prefWidth="37.0" />
                   <Label layoutX="480.0" layoutY="325.0" text="x" />
                   <TextField fx:id="columnsTextField" layoutX="494.0" layoutY="321.0" onKeyTyped="#validateOnKeyTyped" prefHeight="25.0" prefWidth="37.0" />
-                  <ScrollPane prefHeight="406.0" prefWidth="137.0">
-                     <content>
-                        <VBox fx:id="iconsVBox" prefHeight="457.0" prefWidth="122.0" spacing="10.0">
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding></VBox>
-                     </content>
-                  </ScrollPane>
+                  <Button layoutX="237.0" layoutY="309.0" mnemonicParsing="false" onAction="#adaadfasdf" text="Button" />
+                  <ListView fx:id="iconsListView" prefHeight="425.0" prefWidth="202.0" />
                </children>
             </AnchorPane>
          </children>

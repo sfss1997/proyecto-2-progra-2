@@ -16,6 +16,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -28,6 +32,8 @@ import javafx.scene.Cursor;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -60,14 +66,13 @@ public class SpriteController implements Initializable {
     private AnchorPane spriteAnchorPane;
 
     private Cell[][] cell;
-    private GridPane pane;
+    private GridPane spriteGridPane;
     @FXML
     private TextField rowsTextField;
     @FXML
     private TextField columnsTextField;
 
-    private ArchivosXML archivos;
-    @FXML
+    private ArchivosXML archivosXML;
     private VBox iconsVBox;
     @FXML
     private MenuItem deleteMenuItem;
@@ -82,16 +87,19 @@ public class SpriteController implements Initializable {
     private ArrayList<String> url;
     private ArrayList<String> x;
     private ArrayList<String> y;
+    @FXML
+    private ListView<String> iconsListView;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
             // TODO
-            archivos = new ArchivosXML();
+            archivosXML = new ArchivosXML();
+            this.auxImageView = new ImageView("icon/chrome.png");
             this.url = new ArrayList<>();
             this.x = new ArrayList<>();
             this.y = new ArrayList<>();
-            setVBox();
+            setListView();
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(SpriteController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
@@ -100,125 +108,74 @@ public class SpriteController implements Initializable {
     }
 
     @FXML
-    public void add(ActionEvent event) throws Exception {
-        spriteAnchorPane.getChildren().clear();
+    public void createGridPane(ActionEvent event) throws Exception {
+        this.spriteAnchorPane.getChildren().clear();
         this.rows = Integer.parseInt(rowsTextField.getText());
         this.columns = Integer.parseInt(columnsTextField.getText());
-        cell = new Cell[this.rows][this.columns];
-        pane = new GridPane();
+        this.cell = new Cell[this.rows][this.columns];
+        this.spriteGridPane = new GridPane();
 
         for (int i = 0; i < Integer.parseInt(rowsTextField.getText()); i++) {
             for (int j = 0; j < Integer.parseInt(columnsTextField.getText()); j++) {
                 cell[i][j] = new Cell();
-                pane.add(cell[i][j], i, j);
+                cell[i][j].setRow(i);
+                cell[i][j].setColumn(j);
+                spriteGridPane.add(cell[i][j], j, i);
             }
         }
 
-        setupGestureTarget(pane);
-
-        spriteAnchorPane.setPrefHeight(pane.getPrefHeight());
-        spriteAnchorPane.setPrefWidth(pane.getPrefWidth());
-        spriteAnchorPane.getChildren().add(pane);
+        spriteAnchorPane.setPrefHeight(spriteGridPane.getPrefHeight());
+        spriteAnchorPane.setPrefWidth(spriteGridPane.getPrefWidth());
+        spriteAnchorPane.getChildren().add(spriteGridPane);
 
     }
 
-    private void setVBox() throws Exception {
-        for (int i = 0; i < archivos.leerXml().size(); i++) {
-            Image img = new Image(archivos.leerXml().get(i).getDireccion());
-            insertImage(img, iconsVBox);
+    private void setListView() throws Exception {
+        Image img1 = new Image("icon/apple.png");
+        Image img2 = new Image("icon/chrome.png");
+
+        Image[] imageList = new Image[archivosXML.leerXml().size()];
+        for (int i = 0; i < imageList.length; i++) {
+            Image img = new Image(archivosXML.leerXml().get(i).getDireccion());
+            imageList[i] = img;
         }
-    }
 
-    void insertImage(Image i, VBox vb1) {
+        ObservableList<String> items = FXCollections.observableArrayList();
+        for (int i = 0; i < archivosXML.leerXml().size(); i++) {
+            items.add(archivosXML.leerXml().get(i).getNombre());
+        }
 
-        auxImageView = new ImageView();
-        auxImageView.setImage(i);
+        iconsListView.setItems(items);
 
-        setupGestureSource(auxImageView);
-
-        vb1.getChildren().add(auxImageView);
-    }
-
-    void setupGestureSource(final ImageView source) {
-
-        source.setOnDragDetected(new EventHandler<MouseEvent>() {
+        iconsListView.setCellFactory(param -> new ListCell<String>() {
+            private ImageView imageView = new ImageView();
 
             @Override
-            public void handle(MouseEvent event) {
-
-                /* allow any transfer mode */
-                Dragboard db = source.startDragAndDrop(TransferMode.MOVE);
-
-                /* put a image on dragboard */
-                ClipboardContent content = new ClipboardContent();
-
-                Image sourceImage = source.getImage();
-                content.putImage(sourceImage);
-                db.setContent(content);
-
-//                auxImageView = source;
-                event.consume();
+            public void updateItem(String name, boolean empty) {
+                super.updateItem(name, empty);
+                if (empty) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    for (int i = 0; i < items.size(); i++) {
+                        if (name.equals(items.get(i))) {
+                            imageView.setImage(imageList[i]);
+                        }
+                    }
+                    setText(name);
+                    setGraphic(imageView);
+                }
             }
         });
+    }
 
-        source.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent e) {
-                source.setCursor(Cursor.HAND);
-//                    System.out.println("e...: "+e.getSceneX());
-                curseur = (int) e.getSceneX();
-            }
-        });
+    public ImageView getAuxImageView() {
+        return this.auxImageView;
     }
 
     @FXML
     private void deleteOnAction(ActionEvent event) {
         spriteAnchorPane.getChildren().clear();
-    }
-
-    private void setupGestureTarget(final GridPane targetBox) {
-//
-//        targetBox.setOnDragOver(new EventHandler<DragEvent>() {
-//            @Override
-//            public void handle(DragEvent event) {
-//
-//                Dragboard db = event.getDragboard();
-//
-//                if (db.hasImage()) {
-//                    event.acceptTransferModes(TransferMode.MOVE);
-//                }
-//
-//                event.consume();
-//            }
-//        });
-//
-//        targetBox.setOnDragDropped(new EventHandler<DragEvent>() {
-//            @Override
-//            public void handle(DragEvent event) {
-//
-//                Dragboard db = event.getDragboard();
-//
-//                if (db.hasImage()) {
-//
-//                    auxImageView.setImage(db.getImage());
-//
-//                    Point2D localPoint = targetBox.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
-//
-////                    System.out.println("event.getSceneX : "+event.getSceneX());
-////                    System.out.println("localPoint.getX : "+localPoint.getX());
-////                    System.out.println("********");
-//                    targetBox.getChildren().remove(auxImageView);
-//
-//                    auxImageView.setX((int) (localPoint.getX() - auxImageView.getBoundsInLocal().getWidth() / 2));
-//                    auxImageView.setY((int) (localPoint.getY() - auxImageView.getBoundsInLocal().getHeight() / 2));
-//
-//                    targetBox.getChildren().add(auxImageView);
-//
-//                    event.consume();
-//                }
-//            }
-//        });
-
     }
 
     @FXML
@@ -266,6 +223,25 @@ public class SpriteController implements Initializable {
 
     @FXML
     private void saveProgressOnAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void adaadfasdf(ActionEvent event) {
+        String textAreaString = "";
+        ObservableList listOfItems = iconsListView.getSelectionModel().getSelectedItems();
+        for (Object item : listOfItems) {
+            textAreaString += (String) item;
+        }
+        System.out.println(textAreaString);
+    }
+
+    public String getSelectedItemFromListView() {
+        String selectedItem = "";
+        ObservableList<String> listOfItems = iconsListView.getSelectionModel().getSelectedItems();
+        for (Object item : listOfItems) {
+            selectedItem = (String) item;
+        }
+        return selectedItem;
     }
 
 }
