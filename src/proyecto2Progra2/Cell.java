@@ -31,29 +31,11 @@ public class Cell extends Pane {
         setStyle("-fx-border-color : black");
         this.setPrefSize(100, 100);
         this.imageView = new ImageView();
-        
-//        imageView.setOnDragOver(new EventHandler<DragEvent>() {
-//            @Override
-//            public void handle(DragEvent event) {
-//                if (event.getDragboard().hasFiles()) {
-//                    event.acceptTransferModes(TransferMode.ANY);
-//                }
-//            }
-//        });
-//        imageView.setOnDragDropped(new EventHandler<DragEvent>() {
-//            @Override
-//            public void handle(DragEvent event) {
-//                try {
-//                    List<File> files = event.getDragboard().getFiles();
-//                    Image img = new Image(new FileInputStream(files.get(0)));
-//                    imageView.setImage(img);
-//                } catch (FileNotFoundException ex) {
-//                    Logger.getLogger(Cell.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//        });
+        this.setOnMouseClicked(e -> handleClick());
+    }
 
-        this.getChildren().add(imageView);
+    private void handleClick() {
+        this.getChildren().add(new ImageView("icon/chrome.png"));
     }
 
 }

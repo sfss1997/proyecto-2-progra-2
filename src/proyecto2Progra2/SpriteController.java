@@ -110,7 +110,7 @@ public class SpriteController implements Initializable {
         for (int i = 0; i < Integer.parseInt(rowsTextField.getText()); i++) {
             for (int j = 0; j < Integer.parseInt(columnsTextField.getText()); j++) {
                 cell[i][j] = new Cell();
-                pane.add(cell[i][j], j, i);
+                pane.add(cell[i][j], i, j);
             }
         }
 
@@ -177,47 +177,47 @@ public class SpriteController implements Initializable {
     }
 
     private void setupGestureTarget(final GridPane targetBox) {
-
-        targetBox.setOnDragOver(new EventHandler<DragEvent>() {
-            @Override
-            public void handle(DragEvent event) {
-
-                Dragboard db = event.getDragboard();
-
-                if (db.hasImage()) {
-                    event.acceptTransferModes(TransferMode.MOVE);
-                }
-
-                event.consume();
-            }
-        });
-
-        targetBox.setOnDragDropped(new EventHandler<DragEvent>() {
-            @Override
-            public void handle(DragEvent event) {
-
-                Dragboard db = event.getDragboard();
-
-                if (db.hasImage()) {
-
-                    auxImageView.setImage(db.getImage());
-
-                    Point2D localPoint = targetBox.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
-
-//                    System.out.println("event.getSceneX : "+event.getSceneX());
-//                    System.out.println("localPoint.getX : "+localPoint.getX());
-//                    System.out.println("********");
-                    targetBox.getChildren().remove(auxImageView);
-
-                    auxImageView.setX((int) (localPoint.getX() - auxImageView.getBoundsInLocal().getWidth() / 2));
-                    auxImageView.setY((int) (localPoint.getY() - auxImageView.getBoundsInLocal().getHeight() / 2));
-
-                    targetBox.getChildren().add(auxImageView);
-
-                    event.consume();
-                }
-            }
-        });
+//
+//        targetBox.setOnDragOver(new EventHandler<DragEvent>() {
+//            @Override
+//            public void handle(DragEvent event) {
+//
+//                Dragboard db = event.getDragboard();
+//
+//                if (db.hasImage()) {
+//                    event.acceptTransferModes(TransferMode.MOVE);
+//                }
+//
+//                event.consume();
+//            }
+//        });
+//
+//        targetBox.setOnDragDropped(new EventHandler<DragEvent>() {
+//            @Override
+//            public void handle(DragEvent event) {
+//
+//                Dragboard db = event.getDragboard();
+//
+//                if (db.hasImage()) {
+//
+//                    auxImageView.setImage(db.getImage());
+//
+//                    Point2D localPoint = targetBox.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
+//
+////                    System.out.println("event.getSceneX : "+event.getSceneX());
+////                    System.out.println("localPoint.getX : "+localPoint.getX());
+////                    System.out.println("********");
+//                    targetBox.getChildren().remove(auxImageView);
+//
+//                    auxImageView.setX((int) (localPoint.getX() - auxImageView.getBoundsInLocal().getWidth() / 2));
+//                    auxImageView.setY((int) (localPoint.getY() - auxImageView.getBoundsInLocal().getHeight() / 2));
+//
+//                    targetBox.getChildren().add(auxImageView);
+//
+//                    event.consume();
+//                }
+//            }
+//        });
 
     }
 
