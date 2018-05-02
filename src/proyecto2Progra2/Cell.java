@@ -23,7 +23,7 @@ public class Cell extends Pane {
     private ArchivosXML archivosXML;
     private int row;
     private int column;
-    private String name;
+    private String direction;
     
     public Cell() {
         try {
@@ -45,7 +45,7 @@ public class Cell extends Pane {
 //                for (int i = 0; i < archivosXML.leerXml().size(); i++) {
 //                    if(archivosXML.leerXml().get(i).getNombre().equals(selectedItem)){
                         this.getChildren().add(new ImageView(archivosXML.leerXml().get(2).getDireccion()));
-                        setName(archivosXML.leerXml().get(2).getNombre());
+                        setName(archivosXML.leerXml().get(2).getDireccion());
 //                    }
 //                }
 //            }
@@ -71,11 +71,11 @@ public class Cell extends Pane {
     }
 
     public String getName() {
-        return name;
+        return direction;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.direction = name;
     }
 
 }
