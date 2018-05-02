@@ -5,7 +5,9 @@
  */
 package proyecto2Progra2;
 
+import archivos.ArchivosJSON;
 import archivos.ArchivosXML;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.image.ImageView;
@@ -24,6 +26,7 @@ public class Cell extends Pane {
     private int row;
     private int column;
     private String direction;
+    private ArchivosJSON archives;
     
     public Cell() {
         try {
@@ -53,7 +56,8 @@ public class Cell extends Pane {
             Logger.getLogger(Cell.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+   
     public int getRow() {
         return row;
     }

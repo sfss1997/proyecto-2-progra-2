@@ -188,7 +188,53 @@ public class SpriteController extends ArchivosJSON implements Initializable {
     }
 
     @FXML
-    private void openProjectOnAction(ActionEvent event) {
+    private void openProjectOnAction(ActionEvent event) throws Exception {
+        System.out.println("hola");
+        ArrayList document = leerJson();
+        
+        
+        String numberOfColums =document.get(1).toString();
+        String NumberOfRows = document.get(2).toString();
+        ArrayList url2 = (ArrayList) document.get(3);
+        ArrayList x2= (ArrayList) document.get(4);
+        ArrayList y2 = (ArrayList) document.get(5);
+
+        columnsTextField.setText(numberOfColums);
+        rowsTextField.setText(NumberOfRows);
+        this.spriteAnchorPane.getChildren().clear();
+        this.rows = Integer.parseInt(rowsTextField.getText());
+        this.columns = Integer.parseInt(columnsTextField.getText());
+        this.cell = new Cell[this.rows][this.columns];
+        this.spriteGridPane = new GridPane();
+
+        for (int i = 0; i < Integer.parseInt(rowsTextField.getText()); i++) {
+            for (int j = 0; j < Integer.parseInt(columnsTextField.getText()); j++) {
+                cell[i][j] = new Cell();
+                cell[i][j].setRow(i);
+                cell[i][j].setColumn(j);
+                spriteGridPane.add(cell[i][j], j, i);
+            }
+        }
+
+        spriteAnchorPane.setPrefHeight(spriteGridPane.getPrefHeight());
+        spriteAnchorPane.setPrefWidth(spriteGridPane.getPrefWidth());
+        spriteAnchorPane.getChildren().add(spriteGridPane);
+        
+        
+        int cont=0;
+        for (int i = 0; i < Integer.parseInt(rowsTextField.getText()); i++) {
+            for (int j = 0; j < Integer.parseInt(columnsTextField.getText()); j++) {
+                
+                cell[i][j].getChildren().add(new ImageView(url2.get(cont).toString()));
+//                cell[i][j].setDirection(document.get(3).toString());
+                  cont++;
+            }
+        }
+       
+
+        
+        
+        
     }
 
     @FXML
