@@ -1,0 +1,8 @@
+{
+    "ancho": 20,
+    "x": ["100", "200"],
+    "y": ["300", "400"],
+    "alto": 5,
+    "nombre": "proyec1",
+    "url": ["icon\/apple.png", "icon\/chrome.png"]
+}

@@ -43,28 +43,47 @@ public class P extends Application {
         
        
         
-        ArchivosXML archivosXML = new ArchivosXML();
-        ArchivosJSON archivosJSON = new ArchivosJSON();
-        archivosXML.generarDocumento();
-        archivosXML.generarXml();
+//        ArchivosXML archivosXML = new ArchivosXML();
+//        ArchivosJSON archivosJSON = new ArchivosJSON();
+//        archivosXML.generarDocumento();
+//        archivosXML.generarXml();
 //        archivosXML.leerXml();
-        ArrayList<String> url = new ArrayList();
-        ArrayList<String> x = new ArrayList();
-        ArrayList<String> y = new ArrayList();
-        
-        url.add("icon/apple.png");
-        url.add("icon/chrome.png");
-        x.add("100");
-        x.add("200");
-        y.add("300");
-        y.add("400");
-        int ancho = 2;
-        int largo = 2;
-        archivosJSON.escribirJson("pedro", url, x, y, ancho, largo);
-        
+//        ArrayList<String> url = new ArrayList();
+//        ArrayList<String> x = new ArrayList();
+//        ArrayList<String> y = new ArrayList();
+//        
+//        url.add("icon/apple.png");
+//        url.add("icon/chrome.png");
+//        
+//        
+//        x.add("100");
+//        x.add("200");
+//        y.add("300");
+//        y.add("400");
+//        int ancho = 2;
+//        int largo = 2;
+//        archivosJSON.escribirJson("proyec1", url, x, y, ancho, largo);
+
+//        ArrayList<Object> archivoJson = archivosJSON.leerJson();
+//        
+//        System.out.println("nombre : "+archivoJson.get(0));
+//        System.out.println("ancho : "+archivoJson.get(1));
+//        System.out.println("alto : "+archivoJson.get(2));
+//        ArrayList url2 = (ArrayList) archivoJson.get(3);
+//        ArrayList x2= (ArrayList) archivoJson.get(4);
+//        ArrayList y2 = (ArrayList) archivoJson.get(5);
+//        
+//        for (int i = 0; i < url2.size(); i++) {
+//            
+//            
+//            System.out.println(url2.get(i));
+//            System.out.println(x2.get(i));
+//            System.out.println(y2.get(i));
+//            
+//        }
       
         
-        launch(args);
+          launch(args);
     }
-    
+
 }

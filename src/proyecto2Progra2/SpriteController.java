@@ -5,6 +5,7 @@
  */
 package proyecto2Progra2;
 
+import archivos.ArchivosJSON;
 import archivos.ArchivosXML;
 import java.io.File;
 import java.io.IOException;
@@ -56,7 +57,8 @@ public class SpriteController implements Initializable {
     private TextField columnsTextField;
 
     private ArchivosXML archivosXML;
-
+    private ArchivosJSON archivosJson;
+    
     @FXML
     private MenuItem deleteMenuItem;
 
@@ -191,6 +193,28 @@ public class SpriteController implements Initializable {
 
     @FXML
     private void saveProgressOnAction(ActionEvent event) {
+        
+        ArrayList<String> url = new ArrayList();
+        ArrayList<String> x = new ArrayList();
+        ArrayList<String> y = new ArrayList();
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                url.add(cell[i][j].getDirection());
+                x.add(String.valueOf(j));
+                y.add(String.valueOf(i));
+            }
+        }   
+//        System.out.println(rows);
+//        System.out.println(columns);
+//        for (int i = 0; i < rows; i++) {
+//            for (int j = 0; j < columns; j++) {
+//                System.out.println(cell[i][j].getDirection());
+//                System.out.println(j);
+//                 System.out.println(i);
+//            }
+//        }
+        
+      archivosJson.escribirJson("json", url, x, y, columns, rows);
     }
 
     public void setSelectedItem() {
