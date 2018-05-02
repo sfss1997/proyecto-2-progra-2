@@ -35,6 +35,7 @@ public class Cell extends Pane {
             this.setOnMouseClicked(e -> handleClick());
             this.spriteController = new SpriteController();
             this.archivosXML = new ArchivosXML();
+            this.direction = "";
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(Cell.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -48,7 +49,7 @@ public class Cell extends Pane {
                     if(archivosXML.leerXml().get(i).getNombre().equals(selectedItem)){
                         this.getChildren().clear();
                         this.getChildren().add(new ImageView(archivosXML.leerXml().get(i).getDireccion()));
-                        setName(archivosXML.leerXml().get(i).getDireccion());
+                        setDirection(archivosXML.leerXml().get(i).getDireccion());
                     }
                 }
             }
@@ -72,14 +73,6 @@ public class Cell extends Pane {
 
     public void setColumn(int column) {
         this.column = column;
-    }
-
-    public String getName() {
-        return direction;
-    }
-
-    public void setName(String name) {
-        this.direction = name;
     }
 
     public String getDirection() {

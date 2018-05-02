@@ -210,8 +210,6 @@ public class SpriteController extends ArchivosJSON implements Initializable {
         for (int i = 0; i < Integer.parseInt(rowsTextField.getText()); i++) {
             for (int j = 0; j < Integer.parseInt(columnsTextField.getText()); j++) {
                 cell[i][j] = new Cell();
-                cell[i][j].setRow(i);
-                cell[i][j].setColumn(j);
                 spriteGridPane.add(cell[i][j], j, i);
             }
         }
@@ -224,9 +222,10 @@ public class SpriteController extends ArchivosJSON implements Initializable {
         int cont=0;
         for (int i = 0; i < Integer.parseInt(rowsTextField.getText()); i++) {
             for (int j = 0; j < Integer.parseInt(columnsTextField.getText()); j++) {
-                
-                cell[i][j].getChildren().add(new ImageView(url2.get(cont).toString()));
-                cell[i][j].setDirection(url2.get(cont).toString());
+                if(!url2.get(cont).equals("")){
+                    cell[i][j].getChildren().add(new ImageView(url2.get(cont).toString()));
+                    cell[i][j].setDirection(url2.get(cont).toString());
+                }
                   cont++;
             }
         }
@@ -246,8 +245,8 @@ public class SpriteController extends ArchivosJSON implements Initializable {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 url.add(cell[i][j].getDirection());
-                x.add(String.valueOf(j));
-                y.add(String.valueOf(i));
+                x.add(String.valueOf(cell[i][j].getRow()));
+                y.add(String.valueOf(cell[i][j].getColumn()));
             }
         }   
 //        System.out.println(rows);
