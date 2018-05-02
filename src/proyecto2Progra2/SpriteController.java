@@ -226,7 +226,7 @@ public class SpriteController extends ArchivosJSON implements Initializable {
             for (int j = 0; j < Integer.parseInt(columnsTextField.getText()); j++) {
                 
                 cell[i][j].getChildren().add(new ImageView(url2.get(cont).toString()));
-//                cell[i][j].setDirection(document.get(3).toString());
+                cell[i][j].setDirection(url2.get(cont).toString());
                   cont++;
             }
         }
