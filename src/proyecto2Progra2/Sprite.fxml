@@ -52,8 +52,7 @@
                   <TextField fx:id="rowsTextField" layoutX="436.0" layoutY="321.0" onKeyTyped="#validateOnKeyTyped" prefHeight="25.0" prefWidth="37.0" />
                   <Label layoutX="480.0" layoutY="325.0" text="x" />
                   <TextField fx:id="columnsTextField" layoutX="494.0" layoutY="321.0" onKeyTyped="#validateOnKeyTyped" prefHeight="25.0" prefWidth="37.0" />
-                  <Button layoutX="237.0" layoutY="309.0" mnemonicParsing="false" onAction="#adaadfasdf" text="Button" />
-                  <ListView fx:id="iconsListView" prefHeight="425.0" prefWidth="202.0" />
+                  <ListView fx:id="iconsListView" onMouseClicked="#setSelectedItem" prefHeight="425.0" prefWidth="202.0" />
                </children>
             </AnchorPane>
          </children>

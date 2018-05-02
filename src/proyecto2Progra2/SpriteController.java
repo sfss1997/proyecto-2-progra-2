@@ -49,41 +49,32 @@ public class SpriteController implements Initializable {
 
     private Cell[][] cell;
     private GridPane spriteGridPane;
+
     @FXML
     private TextField rowsTextField;
     @FXML
     private TextField columnsTextField;
 
     private ArchivosXML archivosXML;
-    private VBox iconsVBox;
+
     @FXML
     private MenuItem deleteMenuItem;
-    private Object fileChooser;
-
-    private ImageView auxImageView;
-    private int curseur;
 
     private int rows;
     private int columns;
 
-    private ArrayList<String> url;
-    private ArrayList<String> x;
-    private ArrayList<String> y;
     @FXML
     private ListView<String> iconsListView;
 
-    private String selectedItem = "";
+    private static String selectedItem = "";
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
             // TODO
             archivosXML = new ArchivosXML();
-            this.auxImageView = new ImageView("icon/chrome.png");
-            this.url = new ArrayList<>();
-            this.x = new ArrayList<>();
-            this.y = new ArrayList<>();
-            setListView();
+            initializeListView();
+
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(SpriteController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
@@ -114,10 +105,7 @@ public class SpriteController implements Initializable {
 
     }
 
-    private void setListView() throws Exception {
-        Image img1 = new Image("icon/apple.png");
-        Image img2 = new Image("icon/chrome.png");
-
+    private void initializeListView() throws Exception {
         Image[] imageList = new Image[archivosXML.leerXml().size()];
         for (int i = 0; i < imageList.length; i++) {
             Image img = new Image(archivosXML.leerXml().get(i).getDireccion());
@@ -151,10 +139,6 @@ public class SpriteController implements Initializable {
                 }
             }
         });
-    }
-
-    public ImageView getAuxImageView() {
-        return this.auxImageView;
     }
 
     @FXML
@@ -209,26 +193,17 @@ public class SpriteController implements Initializable {
     private void saveProgressOnAction(ActionEvent event) {
     }
 
-    @FXML
-    private void adaadfasdf(MouseEvent event) {
-        String textAreaString = "";
-        ObservableList listOfItems = iconsListView.getSelectionModel().getSelectedItems();
-        for (Object item : listOfItems) {
-            textAreaString += (String) item;
-        }
-        this.selectedItem = textAreaString;
-        System.out.println(textAreaString + "------ " + this.selectedItem);
-        
-    }
-
-    public String getSelectedItemFromListView() {
+    public void setSelectedItem() {
         String selectedItem1 = "";
-        ObservableList listOfItems = iconsListView.getSelectionModel().getSelectedIndices();
+        ObservableList listOfItems = iconsListView.getSelectionModel().getSelectedItems();
         for (Object item : listOfItems) {
             selectedItem1 = (String) item;
         }
-        return selectedItem1;
-//System.out.println(this.selectedItem + "<---");
+        this.selectedItem = selectedItem1;
+    }
+
+    public String getSelectedItem() {
+        return this.selectedItem;
     }
 
 }
