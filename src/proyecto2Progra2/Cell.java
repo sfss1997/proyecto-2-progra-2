@@ -43,6 +43,7 @@ public class Cell extends Pane {
             if(!selectedItem.equals("")){
                 for (int i = 0; i < archivosXML.leerXml().size(); i++) {
                     if(archivosXML.leerXml().get(i).getNombre().equals(selectedItem)){
+                        this.getChildren().clear();
                         this.getChildren().add(new ImageView(archivosXML.leerXml().get(i).getDireccion()));
                         setName(archivosXML.leerXml().get(i).getDireccion());
                     }
