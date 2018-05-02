@@ -12,21 +12,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="431.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto2Progra2.SpriteController">
+<AnchorPane id="AnchorPane" prefHeight="557.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto2Progra2.SpriteController">
    <children>
-      <VBox prefHeight="431.0" prefWidth="624.0">
+      <VBox prefHeight="557.0" prefWidth="810.0">
          <children>
             <MenuBar>
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="New project" />
+                    <MenuItem mnemonicParsing="false" onAction="#newProjectOnAction" text="New project" />
                         <MenuItem mnemonicParsing="false" onAction="#openProjectOnAction" text="Open project" />
                         <MenuItem mnemonicParsing="false" onAction="#saveProgressOnAction" text="Save" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#exportAsImage" text="Export as image" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Exit" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
@@ -41,18 +39,18 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <AnchorPane prefHeight="548.0" prefWidth="624.0">
+            <AnchorPane prefHeight="548.0" prefWidth="810.0">
                <children>
-                  <ScrollPane layoutX="289.0" layoutY="14.0" prefHeight="262.0" prefWidth="318.0">
+                  <ScrollPane layoutX="233.0" layoutY="64.0" prefHeight="447.0" prefWidth="552.0">
                     <content>
-                      <AnchorPane fx:id="spriteAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="262.0" prefWidth="317.0" />
+                      <AnchorPane fx:id="spriteAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="448.0" prefWidth="555.0" />
                     </content>
                   </ScrollPane>
-                  <Button layoutX="392.0" layoutY="321.0" mnemonicParsing="false" onAction="#createGridPane" text="Size" />
-                  <TextField fx:id="rowsTextField" layoutX="436.0" layoutY="321.0" onKeyTyped="#validateOnKeyTyped" prefHeight="25.0" prefWidth="37.0" />
-                  <Label layoutX="480.0" layoutY="325.0" text="x" />
-                  <TextField fx:id="columnsTextField" layoutX="494.0" layoutY="321.0" onKeyTyped="#validateOnKeyTyped" prefHeight="25.0" prefWidth="37.0" />
-                  <ListView fx:id="iconsListView" onMouseClicked="#setSelectedItem" prefHeight="425.0" prefWidth="202.0" />
+                  <Button layoutX="233.0" layoutY="23.0" mnemonicParsing="false" onAction="#createGridPane" text="Size" />
+                  <TextField fx:id="rowsTextField" layoutX="282.0" layoutY="23.0" onKeyTyped="#validateOnKeyTyped" prefHeight="25.0" prefWidth="37.0" />
+                  <Label layoutX="327.0" layoutY="27.0" text="x" />
+                  <TextField fx:id="columnsTextField" layoutX="340.0" layoutY="23.0" onKeyTyped="#validateOnKeyTyped" prefHeight="25.0" prefWidth="37.0" />
+                  <ListView fx:id="iconsListView" onMouseClicked="#setSelectedItem" prefHeight="532.0" prefWidth="202.0" />
                </children>
             </AnchorPane>
          </children>

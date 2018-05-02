@@ -20,6 +20,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -33,6 +34,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 
@@ -58,7 +60,7 @@ public class SpriteController extends ArchivosJSON implements Initializable {
 
     private ArchivosXML archivosXML;
 //    private ArchivosJSON archivosJson;
-    
+
     @FXML
     private MenuItem deleteMenuItem;
 
@@ -92,8 +94,8 @@ public class SpriteController extends ArchivosJSON implements Initializable {
         this.cell = new Cell[this.rows][this.columns];
         this.spriteGridPane = new GridPane();
 
-        for (int i = 0; i < Integer.parseInt(rowsTextField.getText()); i++) {
-            for (int j = 0; j < Integer.parseInt(columnsTextField.getText()); j++) {
+        for (int i = 0; i < this.rows; i++) {
+            for (int j = 0; j < this.columns; j++) {
                 cell[i][j] = new Cell();
                 cell[i][j].setRow(i);
                 cell[i][j].setColumn(j);
@@ -144,8 +146,23 @@ public class SpriteController extends ArchivosJSON implements Initializable {
     }
 
     @FXML
-    private void deleteOnAction(ActionEvent event) {
-        spriteAnchorPane.getChildren().clear();
+    private void deleteOnAction(ActionEvent event) throws Exception {
+        this.spriteAnchorPane.getChildren().clear();
+        this.cell = new Cell[this.rows][this.columns];
+        this.spriteGridPane = new GridPane();
+
+        for (int i = 0; i < this.rows; i++) {
+            for (int j = 0; j < this.columns; j++) {
+                cell[i][j] = new Cell();
+                cell[i][j].setRow(i);
+                cell[i][j].setColumn(j);
+                spriteGridPane.add(cell[i][j], j, i);
+            }
+        }
+
+        spriteAnchorPane.setPrefHeight(spriteGridPane.getPrefHeight());
+        spriteAnchorPane.setPrefWidth(spriteGridPane.getPrefWidth());
+        spriteAnchorPane.getChildren().add(spriteGridPane);
     }
 
     @FXML
@@ -191,12 +208,11 @@ public class SpriteController extends ArchivosJSON implements Initializable {
     private void openProjectOnAction(ActionEvent event) throws Exception {
         System.out.println("hola");
         ArrayList document = leerJson();
-        
-        
-        String numberOfColums =document.get(1).toString();
+
+        String numberOfColums = document.get(1).toString();
         String NumberOfRows = document.get(2).toString();
         ArrayList url2 = (ArrayList) document.get(3);
-        ArrayList x2= (ArrayList) document.get(4);
+        ArrayList x2 = (ArrayList) document.get(4);
         ArrayList y2 = (ArrayList) document.get(5);
 
         columnsTextField.setText(numberOfColums);
@@ -217,28 +233,23 @@ public class SpriteController extends ArchivosJSON implements Initializable {
         spriteAnchorPane.setPrefHeight(spriteGridPane.getPrefHeight());
         spriteAnchorPane.setPrefWidth(spriteGridPane.getPrefWidth());
         spriteAnchorPane.getChildren().add(spriteGridPane);
-        
-        
-        int cont=0;
+
+        int cont = 0;
         for (int i = 0; i < Integer.parseInt(rowsTextField.getText()); i++) {
             for (int j = 0; j < Integer.parseInt(columnsTextField.getText()); j++) {
-                if(!url2.get(cont).equals("")){
+                if (!url2.get(cont).equals("")) {
                     cell[i][j].getChildren().add(new ImageView(url2.get(cont).toString()));
                     cell[i][j].setDirection(url2.get(cont).toString());
                 }
-                  cont++;
+                cont++;
             }
         }
-       
 
-        
-        
-        
     }
 
     @FXML
     private void saveProgressOnAction(ActionEvent event) {
-        
+
         ArrayList<String> url = new ArrayList();
         ArrayList<String> x = new ArrayList();
         ArrayList<String> y = new ArrayList();
@@ -248,7 +259,7 @@ public class SpriteController extends ArchivosJSON implements Initializable {
                 x.add(String.valueOf(cell[i][j].getRow()));
                 y.add(String.valueOf(cell[i][j].getColumn()));
             }
-        }   
+        }
 //        System.out.println(rows);
 //        System.out.println(columns);
 //        for (int i = 0; i < rows; i++) {
@@ -258,10 +269,11 @@ public class SpriteController extends ArchivosJSON implements Initializable {
 //                 System.out.println(i);
 //            }
 //        }
-        
-      escribirJson("json", url, x, y, columns, rows);
+
+        escribirJson("json", url, x, y, columns, rows);
     }
 
+    @FXML
     public void setSelectedItem() {
         String selectedItem1 = "";
         ObservableList listOfItems = iconsListView.getSelectionModel().getSelectedItems();
@@ -273,6 +285,11 @@ public class SpriteController extends ArchivosJSON implements Initializable {
 
     public String getSelectedItem() {
         return this.selectedItem;
+    }
+
+    @FXML
+    private void newProjectOnAction(ActionEvent event) {
+        spriteAnchorPane.getChildren().clear();
     }
 
 }
