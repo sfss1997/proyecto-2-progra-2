@@ -42,7 +42,7 @@ import javax.xml.parsers.ParserConfigurationException;
  *
  * @author fabian
  */
-public class SpriteController implements Initializable {
+public class SpriteController extends ArchivosJSON implements Initializable {
     //
 
     @FXML
@@ -57,7 +57,7 @@ public class SpriteController implements Initializable {
     private TextField columnsTextField;
 
     private ArchivosXML archivosXML;
-    private ArchivosJSON archivosJson;
+//    private ArchivosJSON archivosJson;
     
     @FXML
     private MenuItem deleteMenuItem;
@@ -214,7 +214,7 @@ public class SpriteController implements Initializable {
 //            }
 //        }
         
-      archivosJson.escribirJson("json", url, x, y, columns, rows);
+      escribirJson("json", url, x, y, columns, rows);
     }
 
     public void setSelectedItem() {
