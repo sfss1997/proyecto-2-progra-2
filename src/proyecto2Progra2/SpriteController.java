@@ -7,31 +7,19 @@ package proyecto2Progra2;
 
 import archivos.ArchivosXML;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.geometry.Point2D;
-import javafx.geometry.Pos;
-import javafx.scene.Cursor;
 import javafx.scene.SnapshotParameters;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
@@ -39,19 +27,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileSystemView;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -89,6 +71,8 @@ public class SpriteController implements Initializable {
     private ArrayList<String> y;
     @FXML
     private ListView<String> iconsListView;
+
+    private String selectedItem = "";
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -226,22 +210,25 @@ public class SpriteController implements Initializable {
     }
 
     @FXML
-    private void adaadfasdf(ActionEvent event) {
+    private void adaadfasdf(MouseEvent event) {
         String textAreaString = "";
         ObservableList listOfItems = iconsListView.getSelectionModel().getSelectedItems();
         for (Object item : listOfItems) {
             textAreaString += (String) item;
         }
-        System.out.println(textAreaString);
+        this.selectedItem = textAreaString;
+        System.out.println(textAreaString + "------ " + this.selectedItem);
+        
     }
 
     public String getSelectedItemFromListView() {
-        String selectedItem = "";
-        ObservableList<String> listOfItems = iconsListView.getSelectionModel().getSelectedItems();
+        String selectedItem1 = "";
+        ObservableList listOfItems = iconsListView.getSelectionModel().getSelectedIndices();
         for (Object item : listOfItems) {
-            selectedItem = (String) item;
+            selectedItem1 = (String) item;
         }
-        return selectedItem;
+        return selectedItem1;
+//System.out.println(this.selectedItem + "<---");
     }
 
 }

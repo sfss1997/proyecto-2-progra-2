@@ -39,14 +39,16 @@ public class Cell extends Pane {
 
     private void handleClick() {
         try {
-            String selectedItem = spriteController.getSelectedItemFromListView();
-            if(!selectedItem.equals("")){
-                for (int i = 0; i < archivosXML.leerXml().size(); i++) {
-                    if(archivosXML.leerXml().get(i).getNombre().equals(selectedItem)){
-                        this.getChildren().add(new ImageView(archivosXML.leerXml().get(i).getDireccion()));
-                    }
-                }
-            }
+//            String selectedItem = spriteController.getSelectedItemFromListView();
+//            System.out.println(selectedItem);
+//            if(!selectedItem.equals("")){
+//                for (int i = 0; i < archivosXML.leerXml().size(); i++) {
+//                    if(archivosXML.leerXml().get(i).getNombre().equals(selectedItem)){
+                        this.getChildren().add(new ImageView(archivosXML.leerXml().get(2).getDireccion()));
+                        setName(archivosXML.leerXml().get(2).getNombre());
+//                    }
+//                }
+//            }
         } catch (Exception ex) {
             Logger.getLogger(Cell.class.getName()).log(Level.SEVERE, null, ex);
         }
