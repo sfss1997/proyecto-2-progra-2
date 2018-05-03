@@ -92,27 +92,39 @@ public class ProyectsAdministration {
         
           
 //            abrirJson.showSaveDialog(null);
-            FileChooser openProyect = new FileChooser() ;
-            Object obj = parser.parse(new FileReader(openProyect.showOpenDialog(null)));
-//            Object obj = parser.parse(new FileReader(abrirJson.getSelectedFile()));
+        FileChooser openProyect = new FileChooser();
+        try {
+            
+            File file = null;
+            file = openProyect.showOpenDialog(null);
+            Object obj = parser.parse(new FileReader(file));
+           
             JSONObject jsonObject = (JSONObject) obj;
-            
+
             String name = jsonObject.get("name").toString();
-            String columns =  jsonObject.get("columns").toString();
-            String rows =   jsonObject.get("rows").toString();
+            String columns = jsonObject.get("columns").toString();
+            String rows = jsonObject.get("rows").toString();
             ArrayList url = (ArrayList) jsonObject.get("url");
-            ArrayList x= (ArrayList) jsonObject.get("x");
+            ArrayList x = (ArrayList) jsonObject.get("x");
             ArrayList y = (ArrayList) jsonObject.get("y");
-            
+
             ArrayList<Object> jsonArchive = new ArrayList<>();
+
+            jsonArchive.add(0, name);
+            jsonArchive.add(1, columns);
+            jsonArchive.add(2, rows);
+            jsonArchive.add(3, url);
+            jsonArchive.add(4, x);
+            jsonArchive.add(5, y);
+
+            return jsonArchive;
+        } catch (Exception e) {
+        }
+
+
+//            Object obj = parser.parse(new FileReader(abrirJson.getSelectedFile()));
             
-            jsonArchive.add(0,name);
-            jsonArchive.add(1,columns);
-            jsonArchive.add(2,rows);
-            jsonArchive.add(3,url);
-            jsonArchive.add(4,x);
-            jsonArchive.add(5,y);
-        return jsonArchive;
+     return null;  
     }
 
 }

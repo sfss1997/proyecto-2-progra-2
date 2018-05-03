@@ -58,7 +58,6 @@ public class Cell extends Pane {
                 this.getChildren().clear();
                 this.url = "";
             }
-            System.out.println(selectedItem + "<----");
         } catch (Exception ex) {
             Logger.getLogger(Cell.class.getName()).log(Level.SEVERE, null, ex);
         }
