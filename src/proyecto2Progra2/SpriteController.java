@@ -35,6 +35,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
@@ -153,13 +154,14 @@ public class SpriteController extends ProyectsAdministration implements Initiali
         WritableImage image = this.spriteAnchorPane.snapshot(new SnapshotParameters(), null);
         changeCellStyle("black");
         // TODO: probably use a file chooser here
-
-        JFileChooser guardarImagen = new JFileChooser();
-        guardarImagen.setApproveButtonText("Guardar");
-        guardarImagen.showSaveDialog(null);
-
-        File file = new File(guardarImagen.getSelectedFile() + ".png");
-        guardarImagen.setVisible(false);
+//
+//        JFileChooser guardarImagen = new JFileChooser();
+//        guardarImagen.setApproveButtonText("Guardar");
+//        guardarImagen.showSaveDialog(null);
+        FileChooser saveImage = new FileChooser() ;
+        File file = new File(saveImage.showSaveDialog(null)+".png");
+//        File file = new File(guardarImagen.getSelectedFile() + ".png");
+//        guardarImagen.setVisible(false);
         try {
             ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
 

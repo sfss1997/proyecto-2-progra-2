@@ -58,11 +58,12 @@ public class ProyectsAdministration {
         obj.put("y", listY);
         
         try {
-            JFileChooser  saveImage = new JFileChooser();
-            saveImage.setApproveButtonText("Guardar");
-             saveImage.showSaveDialog(null);
-            
-            FileWriter file = new FileWriter( saveImage.getSelectedFile()+".json");
+//            JFileChooser  saveImage = new JFileChooser();
+//            saveImage.setApproveButtonText("Guardar");
+//             saveImage.showSaveDialog(null);
+            FileChooser saveProyect = new FileChooser() ;
+            FileWriter file = new FileWriter(saveProyect.showSaveDialog(null)+".json");
+//            FileWriter file = new FileWriter( saveImage.getSelectedFile()+".json");
             file.write(obj.toJSONString());
             file.flush();
             file.close();
@@ -82,17 +83,18 @@ public class ProyectsAdministration {
     public ArrayList readJson() throws Exception{
         
         JSONParser parser = new JSONParser();
-        JFileChooser abrirJson = new JFileChooser();
-       abrirJson.setApproveButtonText("Guardar");
-        abrirJson.showSaveDialog(null);
+//        JFileChooser abrirJson = new JFileChooser();
+//       abrirJson.setApproveButtonText("Guardar");
+//        abrirJson.showSaveDialog(null);
 //        FileChooser abrirJson = new FileChooser();
 //        abrirJson.getExtensionFilters().addAll(
 //         new ExtensionFilter("JSON", "*.json"));
         
           
 //            abrirJson.showSaveDialog(null);
-            
-            Object obj = parser.parse(new FileReader(abrirJson.getSelectedFile()));
+            FileChooser openProyect = new FileChooser() ;
+            Object obj = parser.parse(new FileReader(openProyect.showOpenDialog(null)));
+//            Object obj = parser.parse(new FileReader(abrirJson.getSelectedFile()));
             JSONObject jsonObject = (JSONObject) obj;
             
             String name = jsonObject.get("name").toString();
