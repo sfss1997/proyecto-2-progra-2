@@ -89,18 +89,19 @@ public class SpriteController extends ProyectsAdministration implements Initiali
      */
     @FXML
     public void createGridPane(ActionEvent event) throws Exception {
-        this.spriteAnchorPane.getChildren().clear();
-        this.rows = Integer.parseInt(this.rowsTextField.getText());
-        this.columns = Integer.parseInt(this.columnsTextField.getText());
-        this.cell = new Cell[this.rows][this.columns];
-        this.spriteGridPane = new GridPane();
+        if (isOk()) {
+            this.spriteAnchorPane.getChildren().clear();
+            this.rows = Integer.parseInt(this.rowsTextField.getText());
+            this.columns = Integer.parseInt(this.columnsTextField.getText());
+            this.cell = new Cell[this.rows][this.columns];
+            this.spriteGridPane = new GridPane();
 
-        //Crea el GridPane
-        this.spriteGridPane = this.logic.createGridPane(this.rows, this.columns, this.cell);
+            //Crea el GridPane
+            this.spriteGridPane = this.logic.createGridPane(this.rows, this.columns, this.cell);
 
-        //Añade el GridPane al AnchorPane
-        this.spriteAnchorPane = this.logic.addGridPaneToAnchorPane(this.spriteAnchorPane, this.spriteGridPane);
-
+            //Añade el GridPane al AnchorPane
+            this.spriteAnchorPane = this.logic.addGridPaneToAnchorPane(this.spriteAnchorPane, this.spriteGridPane);
+        }
     }
 
     /**
@@ -149,24 +150,27 @@ public class SpriteController extends ProyectsAdministration implements Initiali
      */
     @FXML
     public void exportAsImage() {
+        if (!this.spriteAnchorPane.getChildren().isEmpty()) {
+            changeCellStyle("none");
+            WritableImage image = this.spriteAnchorPane.snapshot(new SnapshotParameters(), null);
+            changeCellStyle("black");
+            // TODO: probably use a file chooser here
+            //
+            //        JFileChooser guardarImagen = new JFileChooser();
+            //        guardarImagen.setApproveButtonText("Guardar");
+            //        guardarImagen.showSaveDialog(null);
+            FileChooser saveImage = new FileChooser();
+            File file = new File(saveImage.showSaveDialog(null) + ".png");
+            //        File file = new File(guardarImagen.getSelectedFile() + ".png");
+            //        guardarImagen.setVisible(false);
+            try {
+                ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
 
-        changeCellStyle("none");
-        WritableImage image = this.spriteAnchorPane.snapshot(new SnapshotParameters(), null);
-        changeCellStyle("black");
-        // TODO: probably use a file chooser here
-//
-//        JFileChooser guardarImagen = new JFileChooser();
-//        guardarImagen.setApproveButtonText("Guardar");
-//        guardarImagen.showSaveDialog(null);
-        FileChooser saveImage = new FileChooser() ;
-        File file = new File(saveImage.showSaveDialog(null)+".png");
-//        File file = new File(guardarImagen.getSelectedFile() + ".png");
-//        guardarImagen.setVisible(false);
-        try {
-            ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
-
-        } catch (IOException e) {
-            // TODO: handle exception here
+            } catch (IOException e) {
+                // TODO: handle exception here
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se ha iniciado el proyecto");
         }
 
     }
@@ -321,5 +325,16 @@ public class SpriteController extends ProyectsAdministration implements Initiali
 
         //Añade el GridPane al AnchorPane
         this.spriteAnchorPane = this.logic.addGridPaneToAnchorPane(this.spriteAnchorPane, this.spriteGridPane);
+    }
+
+    private boolean isOk() {
+        if (rowsTextField.getText().equals("")
+                || columnsTextField.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Complete todos los espacios");
+            return false;
+        } else {
+            return true;
+        }
+        
     }
 }
