@@ -29,7 +29,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                   <items>
-                    <MenuItem fx:id="deleteMenuItem" mnemonicParsing="false" onAction="#deleteOnAction" text="Delete" />
+                    <MenuItem fx:id="deleteMenuItem" mnemonicParsing="false" onAction="#deleteOnAction" text="Clean" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
@@ -50,7 +50,7 @@
                   <TextField fx:id="rowsTextField" layoutX="282.0" layoutY="23.0" onKeyTyped="#validateOnKeyTyped" prefHeight="25.0" prefWidth="37.0" />
                   <Label layoutX="327.0" layoutY="27.0" text="x" />
                   <TextField fx:id="columnsTextField" layoutX="340.0" layoutY="23.0" onKeyTyped="#validateOnKeyTyped" prefHeight="25.0" prefWidth="37.0" />
-                  <ListView fx:id="iconsListView" onMouseClicked="#setSelectedItem" prefHeight="532.0" prefWidth="202.0" />
+                  <ListView fx:id="iconsListView" onMouseClicked="#setSelectedItem" prefHeight="532.0" prefWidth="202.0" style="-fx-cursor: hand;" />
                </children>
             </AnchorPane>
          </children>

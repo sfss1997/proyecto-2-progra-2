@@ -26,7 +26,6 @@ public class Cell extends Pane {
     private int row;
     private int column;
     private String direction;
-    private ArchivosJSON archives;
     
     public Cell() {
         try {
@@ -41,6 +40,9 @@ public class Cell extends Pane {
         }
     }
 
+    /**
+     * Se ejecuta cuando se da click en una celda.
+     */
     private void handleClick() {
         try {
             String selectedItem = spriteController.getSelectedItem();

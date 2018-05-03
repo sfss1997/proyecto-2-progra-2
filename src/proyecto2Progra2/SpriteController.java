@@ -5,6 +5,7 @@
  */
 package proyecto2Progra2;
 
+import Domain.Logic;
 import archivos.ArchivosJSON;
 import archivos.ArchivosXML;
 import java.io.File;
@@ -45,38 +46,32 @@ import javax.xml.parsers.ParserConfigurationException;
  * @author fabian
  */
 public class SpriteController extends ArchivosJSON implements Initializable {
-    //
 
     @FXML
     private AnchorPane spriteAnchorPane;
-
-    private Cell[][] cell;
-    private GridPane spriteGridPane;
-
     @FXML
     private TextField rowsTextField;
     @FXML
     private TextField columnsTextField;
-
-    private ArchivosXML archivosXML;
-//    private ArchivosJSON archivosJson;
-
     @FXML
     private MenuItem deleteMenuItem;
-
-    private int rows;
-    private int columns;
-
     @FXML
     private ListView<String> iconsListView;
 
+    private Cell[][] cell;
+    private GridPane spriteGridPane;
+    private ArchivosXML archivosXML;
+    private int rows;
+    private int columns;
     private static String selectedItem = "";
+    private Logic logic;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
             // TODO
-            archivosXML = new ArchivosXML();
+            this.archivosXML = new ArchivosXML();
+            this.logic = new Logic();
             initializeListView();
 
         } catch (ParserConfigurationException ex) {
@@ -86,44 +81,46 @@ public class SpriteController extends ArchivosJSON implements Initializable {
         }
     }
 
+    /**
+     * Crea un nuevo GridPane.
+     * @param event
+     * @throws Exception 
+     */
     @FXML
     public void createGridPane(ActionEvent event) throws Exception {
         this.spriteAnchorPane.getChildren().clear();
-        this.rows = Integer.parseInt(rowsTextField.getText());
-        this.columns = Integer.parseInt(columnsTextField.getText());
+        this.rows = Integer.parseInt(this.rowsTextField.getText());
+        this.columns = Integer.parseInt(this.columnsTextField.getText());
         this.cell = new Cell[this.rows][this.columns];
         this.spriteGridPane = new GridPane();
 
-        for (int i = 0; i < this.rows; i++) {
-            for (int j = 0; j < this.columns; j++) {
-                cell[i][j] = new Cell();
-                cell[i][j].setRow(i);
-                cell[i][j].setColumn(j);
-                spriteGridPane.add(cell[i][j], j, i);
-            }
-        }
+        //Crea el GridPane
+        this.spriteGridPane = this.logic.createGridPane(this.rows, this.columns, this.cell);
 
-        spriteAnchorPane.setPrefHeight(spriteGridPane.getPrefHeight());
-        spriteAnchorPane.setPrefWidth(spriteGridPane.getPrefWidth());
-        spriteAnchorPane.getChildren().add(spriteGridPane);
+        //Añade el GridPane al AnchorPane
+        this.spriteAnchorPane = this.logic.addGridPaneToAnchorPane(this.spriteAnchorPane, this.spriteGridPane);
 
     }
 
+    /**
+     * Llena el ListView con los elementos del XML.
+     * @throws Exception 
+     */
     private void initializeListView() throws Exception {
-        Image[] imageList = new Image[archivosXML.leerXml().size()];
+        Image[] imageList = new Image[this.archivosXML.leerXml().size()];
         for (int i = 0; i < imageList.length; i++) {
-            Image img = new Image(archivosXML.leerXml().get(i).getDireccion());
+            Image img = new Image(this.archivosXML.leerXml().get(i).getDireccion());
             imageList[i] = img;
         }
 
         ObservableList<String> items = FXCollections.observableArrayList();
-        for (int i = 0; i < archivosXML.leerXml().size(); i++) {
-            items.add(archivosXML.leerXml().get(i).getNombre());
+        for (int i = 0; i < this.archivosXML.leerXml().size(); i++) {
+            items.add(this.archivosXML.leerXml().get(i).getNombre());
         }
 
-        iconsListView.setItems(items);
+        this.iconsListView.setItems(items);
 
-        iconsListView.setCellFactory(param -> new ListCell<String>() {
+        this.iconsListView.setCellFactory(param -> new ListCell<String>() {
             private ImageView imageView = new ImageView();
 
             @Override
@@ -135,41 +132,40 @@ public class SpriteController extends ArchivosJSON implements Initializable {
                 } else {
                     for (int i = 0; i < items.size(); i++) {
                         if (name.equals(items.get(i))) {
-                            imageView.setImage(imageList[i]);
+                            this.imageView.setImage(imageList[i]);
                         }
                     }
                     setText(name);
-                    setGraphic(imageView);
+                    setGraphic(this.imageView);
                 }
             }
         });
     }
 
+    /**
+     * Borra todo lo que se haya agregado al GridPane
+     * @param event
+     * @throws Exception 
+     */
     @FXML
     private void deleteOnAction(ActionEvent event) throws Exception {
         this.spriteAnchorPane.getChildren().clear();
-        this.cell = new Cell[this.rows][this.columns];
-        this.spriteGridPane = new GridPane();
 
-        for (int i = 0; i < this.rows; i++) {
-            for (int j = 0; j < this.columns; j++) {
-                cell[i][j] = new Cell();
-                cell[i][j].setRow(i);
-                cell[i][j].setColumn(j);
-                spriteGridPane.add(cell[i][j], j, i);
-            }
-        }
+        //Crea el GridPane
+        this.spriteGridPane = this.logic.createGridPane(this.rows, this.columns, this.cell);
 
-        spriteAnchorPane.setPrefHeight(spriteGridPane.getPrefHeight());
-        spriteAnchorPane.setPrefWidth(spriteGridPane.getPrefWidth());
-        spriteAnchorPane.getChildren().add(spriteGridPane);
+        //Añade el GridPane al AnchorPane
+        this.spriteAnchorPane = this.logic.addGridPaneToAnchorPane(this.spriteAnchorPane, this.spriteGridPane);
     }
 
+    /**
+     * Exporta a un archivo .png lo que hay en el AnchorPane.
+     */
     @FXML
     public void exportAsImage() {
 
         changeCellStyle("none");
-        WritableImage image = spriteAnchorPane.snapshot(new SnapshotParameters(), null);
+        WritableImage image = this.spriteAnchorPane.snapshot(new SnapshotParameters(), null);
         changeCellStyle("black");
         // TODO: probably use a file chooser here
 
@@ -188,25 +184,37 @@ public class SpriteController extends ArchivosJSON implements Initializable {
 
     }
 
+    /**
+     * Cambia el color del borde de cada celda del GridPane.
+     * @param color 
+     */
     private void changeCellStyle(String color) {
-        for (int i = 0; i < Integer.parseInt(rowsTextField.getText()); i++) {
-            for (int j = 0; j < Integer.parseInt(columnsTextField.getText()); j++) {
-                cell[i][j].setStyle("-fx-border-color : " + color);
+        for (int i = 0; i < Integer.parseInt(this.rowsTextField.getText()); i++) {
+            for (int j = 0; j < Integer.parseInt(this.columnsTextField.getText()); j++) {
+                this.cell[i][j].setStyle("-fx-border-color : " + color);
             }
         }
     }
 
+    /**
+     * Valida el caracter ingresado en el TextField.
+     * @param event 
+     */
     @FXML
     private void validateOnKeyTyped(KeyEvent event) {
-        char charType = event.getCharacter().charAt(0);
-        if (!Character.isDigit(charType)) {
+        boolean validate = this.logic.isNumeric(event);
+        if (validate == false) {
             event.consume();
         }
     }
 
+    /**
+     * Abre un archivo .json con el progreso guardado.
+     * @param event
+     * @throws Exception 
+     */
     @FXML
     private void openProjectOnAction(ActionEvent event) throws Exception {
-        System.out.println("hola");
         ArrayList document = leerJson();
 
         String numberOfColums = document.get(1).toString();
@@ -215,81 +223,83 @@ public class SpriteController extends ArchivosJSON implements Initializable {
         ArrayList x2 = (ArrayList) document.get(4);
         ArrayList y2 = (ArrayList) document.get(5);
 
-        columnsTextField.setText(numberOfColums);
-        rowsTextField.setText(NumberOfRows);
+        this.columnsTextField.setText(numberOfColums);
+        this.rowsTextField.setText(NumberOfRows);
         this.spriteAnchorPane.getChildren().clear();
-        this.rows = Integer.parseInt(rowsTextField.getText());
-        this.columns = Integer.parseInt(columnsTextField.getText());
+        this.rows = Integer.parseInt(this.rowsTextField.getText());
+        this.columns = Integer.parseInt(this.columnsTextField.getText());
         this.cell = new Cell[this.rows][this.columns];
-        this.spriteGridPane = new GridPane();
 
-        for (int i = 0; i < Integer.parseInt(rowsTextField.getText()); i++) {
-            for (int j = 0; j < Integer.parseInt(columnsTextField.getText()); j++) {
-                cell[i][j] = new Cell();
-                spriteGridPane.add(cell[i][j], j, i);
-            }
-        }
+        //Crea el GridPane
+        this.spriteGridPane = this.logic.createGridPane(this.rows, this.columns, this.cell);
 
-        spriteAnchorPane.setPrefHeight(spriteGridPane.getPrefHeight());
-        spriteAnchorPane.setPrefWidth(spriteGridPane.getPrefWidth());
-        spriteAnchorPane.getChildren().add(spriteGridPane);
+        //Añade el GridPane al AnchorPane
+        this.spriteAnchorPane = this.logic.addGridPaneToAnchorPane(this.spriteAnchorPane, this.spriteGridPane);
 
         int cont = 0;
-        for (int i = 0; i < Integer.parseInt(rowsTextField.getText()); i++) {
-            for (int j = 0; j < Integer.parseInt(columnsTextField.getText()); j++) {
+        for (int i = 0; i < Integer.parseInt(this.rowsTextField.getText()); i++) {
+            for (int j = 0; j < Integer.parseInt(this.columnsTextField.getText()); j++) {
                 if (!url2.get(cont).equals("")) {
-                    cell[i][j].getChildren().add(new ImageView(url2.get(cont).toString()));
-                    cell[i][j].setDirection(url2.get(cont).toString());
+                    this.cell[i][j].getChildren().add(new ImageView(url2.get(cont).toString()));
+                    this.cell[i][j].setDirection(url2.get(cont).toString());
                 }
                 cont++;
             }
         }
 
     }
-
+    
+    /**
+     * Guarda el progreso en un archivo .json
+     * @param event 
+     */
     @FXML
     private void saveProgressOnAction(ActionEvent event) {
 
         ArrayList<String> url = new ArrayList();
         ArrayList<String> x = new ArrayList();
         ArrayList<String> y = new ArrayList();
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                url.add(cell[i][j].getDirection());
-                x.add(String.valueOf(cell[i][j].getRow()));
-                y.add(String.valueOf(cell[i][j].getColumn()));
+        for (int i = 0; i < this.rows; i++) {
+            for (int j = 0; j < this.columns; j++) {
+                url.add(this.cell[i][j].getDirection());
+                x.add(String.valueOf(this.cell[i][j].getRow()));
+                y.add(String.valueOf(this.cell[i][j].getColumn()));
             }
         }
-//        System.out.println(rows);
-//        System.out.println(columns);
-//        for (int i = 0; i < rows; i++) {
-//            for (int j = 0; j < columns; j++) {
-//                System.out.println(cell[i][j].getDirection());
-//                System.out.println(j);
-//                 System.out.println(i);
-//            }
-//        }
 
-        escribirJson("json", url, x, y, columns, rows);
+        escribirJson("json", url, x, y, this.columns, this.rows);
     }
-
+    
+    /**
+     * Guarda en un String el nombre del elemento seleccionado en el ListView.
+     */
     @FXML
     public void setSelectedItem() {
         String selectedItem1 = "";
-        ObservableList listOfItems = iconsListView.getSelectionModel().getSelectedItems();
+        ObservableList listOfItems = this.iconsListView.getSelectionModel().getSelectedItems();
         for (Object item : listOfItems) {
             selectedItem1 = (String) item;
         }
         this.selectedItem = selectedItem1;
     }
 
+    /**
+     * Retorna un String con el nombre del elemento seleccionado en el ListView.
+     * @return 
+     */
     public String getSelectedItem() {
         return this.selectedItem;
     }
 
+    /**
+     * Borra el GridPane.
+     * @param event 
+     */
     @FXML
     private void newProjectOnAction(ActionEvent event) {
-        spriteAnchorPane.getChildren().clear();
+        this.spriteAnchorPane.getChildren().clear();
+        this.rowsTextField.setText("");
+        this.columnsTextField.setText("");
     }
 
 }
