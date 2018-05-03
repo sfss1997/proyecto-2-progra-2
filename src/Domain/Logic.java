@@ -37,6 +37,7 @@ public class Logic {
                 newGridPane.add(cell[i][j], j, i);
             }
         }
+        newGridPane.setStyle("-fx-cursor : hand");
         return newGridPane;
     }
     

@@ -26,7 +26,7 @@ public class Cell extends Pane {
     private int row;
     private int column;
     private String url;
-    
+
     public Cell() {
         try {
             setStyle("-fx-border-color : black");
@@ -46,21 +46,24 @@ public class Cell extends Pane {
     private void handleClick() {
         try {
             String selectedItem = spriteController.getSelectedItem();
-            if(!selectedItem.equals("")){
+            if (!selectedItem.equals("")) {
                 for (int i = 0; i < xmlArchives.readXml().size(); i++) {
-                    if(xmlArchives.readXml().get(i).getName().equals(selectedItem)){
+                    if (xmlArchives.readXml().get(i).getName().equals(selectedItem)) {
                         this.getChildren().clear();
                         this.getChildren().add(new ImageView(xmlArchives.readXml().get(i).getUrl()));
                         setUrl(xmlArchives.readXml().get(i).getUrl());
                     }
                 }
+            } else {
+                this.getChildren().clear();
+                this.url = "";
             }
+            System.out.println(selectedItem + "<----");
         } catch (Exception ex) {
             Logger.getLogger(Cell.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-   
+
     public int getRow() {
         return row;
     }
@@ -85,5 +88,4 @@ public class Cell extends Pane {
         this.url = url;
     }
 
-    
 }

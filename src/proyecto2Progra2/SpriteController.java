@@ -55,8 +55,6 @@ public class SpriteController extends ProyectsAdministration implements Initiali
     @FXML
     private TextField columnsTextField;
     @FXML
-    private MenuItem deleteMenuItem;
-    @FXML
     private ListView<String> iconsListView;
 
     private Cell[][] cell;
@@ -84,8 +82,9 @@ public class SpriteController extends ProyectsAdministration implements Initiali
 
     /**
      * Crea un nuevo GridPane.
+     *
      * @param event
-     * @throws Exception 
+     * @throws Exception
      */
     @FXML
     public void createGridPane(ActionEvent event) throws Exception {
@@ -105,7 +104,8 @@ public class SpriteController extends ProyectsAdministration implements Initiali
 
     /**
      * Llena el ListView con los elementos del XML.
-     * @throws Exception 
+     *
+     * @throws Exception
      */
     private void initializeListView() throws Exception {
         Image[] imageList = new Image[this.xmlArchives.readXml().size()];
@@ -144,22 +144,6 @@ public class SpriteController extends ProyectsAdministration implements Initiali
     }
 
     /**
-     * Borra todo lo que se haya agregado al GridPane
-     * @param event
-     * @throws Exception 
-     */
-    @FXML
-    private void deleteOnAction(ActionEvent event) throws Exception {
-        this.spriteAnchorPane.getChildren().clear();
-
-        //Crea el GridPane
-        this.spriteGridPane = this.logic.createGridPane(this.rows, this.columns, this.cell);
-
-        //Añade el GridPane al AnchorPane
-        this.spriteAnchorPane = this.logic.addGridPaneToAnchorPane(this.spriteAnchorPane, this.spriteGridPane);
-    }
-
-    /**
      * Exporta a un archivo .png lo que hay en el AnchorPane.
      */
     @FXML
@@ -187,7 +171,8 @@ public class SpriteController extends ProyectsAdministration implements Initiali
 
     /**
      * Cambia el color del borde de cada celda del GridPane.
-     * @param color 
+     *
+     * @param color
      */
     private void changeCellStyle(String color) {
         for (int i = 0; i < Integer.parseInt(this.rowsTextField.getText()); i++) {
@@ -199,7 +184,8 @@ public class SpriteController extends ProyectsAdministration implements Initiali
 
     /**
      * Valida el caracter ingresado en el TextField.
-     * @param event 
+     *
+     * @param event
      */
     @FXML
     private void validateOnKeyTyped(KeyEvent event) {
@@ -211,8 +197,9 @@ public class SpriteController extends ProyectsAdministration implements Initiali
 
     /**
      * Abre un archivo .json con el progreso guardado.
+     *
      * @param event
-     * @throws Exception 
+     * @throws Exception
      */
     @FXML
     private void openProjectOnAction(ActionEvent event) throws Exception {
@@ -249,10 +236,11 @@ public class SpriteController extends ProyectsAdministration implements Initiali
         }
 
     }
-    
+
     /**
      * Guarda el progreso en un archivo .json
-     * @param event 
+     *
+     * @param event
      */
     @FXML
     private void saveProgressOnAction(ActionEvent event) {
@@ -270,7 +258,7 @@ public class SpriteController extends ProyectsAdministration implements Initiali
 
         writeJson("json", url, x, y, this.columns, this.rows);
     }
-    
+
     /**
      * Guarda en un String el nombre del elemento seleccionado en el ListView.
      */
@@ -286,7 +274,8 @@ public class SpriteController extends ProyectsAdministration implements Initiali
 
     /**
      * Retorna un String con el nombre del elemento seleccionado en el ListView.
-     * @return 
+     *
+     * @return
      */
     public String getSelectedItem() {
         return this.selectedItem;
@@ -294,7 +283,8 @@ public class SpriteController extends ProyectsAdministration implements Initiali
 
     /**
      * Borra el GridPane.
-     * @param event 
+     *
+     * @param event
      */
     @FXML
     private void newProjectOnAction(ActionEvent event) {
@@ -302,8 +292,32 @@ public class SpriteController extends ProyectsAdministration implements Initiali
         this.rowsTextField.setText("");
         this.columnsTextField.setText("");
     }
+
     @FXML
-    private void about(){
+    private void about() {
         JOptionPane.showMessageDialog(null, "Armacabezas\n\nHans Villalobos\nSergio Siles\n\n2018", "Créditos", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    @FXML
+    private void deleteOnAction(ActionEvent event) throws Exception {
+        this.iconsListView.getSelectionModel().clearSelection();
+        this.selectedItem = "";
+    }
+
+    /**
+     * Borra todo lo que se haya agregado al GridPane
+     *
+     * @param event
+     * @throws Exception
+     */
+    @FXML
+    private void cleanOnAction(ActionEvent event) {
+        this.spriteAnchorPane.getChildren().clear();
+
+        //Crea el GridPane
+        this.spriteGridPane = this.logic.createGridPane(this.rows, this.columns, this.cell);
+
+        //Añade el GridPane al AnchorPane
+        this.spriteAnchorPane = this.logic.addGridPaneToAnchorPane(this.spriteAnchorPane, this.spriteGridPane);
     }
 }

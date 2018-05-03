@@ -22,14 +22,15 @@
                   <items>
                     <MenuItem mnemonicParsing="false" onAction="#newProjectOnAction" text="New project" />
                         <MenuItem mnemonicParsing="false" onAction="#openProjectOnAction" text="Open project" />
-                        <MenuItem mnemonicParsing="false" onAction="#saveProgressOnAction" text="Save" />
+                        <MenuItem mnemonicParsing="false" onAction="#saveProgressOnAction" text="Save as" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#exportAsImage" text="Export as image" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                   <items>
-                    <MenuItem fx:id="deleteMenuItem" mnemonicParsing="false" onAction="#deleteOnAction" text="Clean" />
+                    <MenuItem mnemonicParsing="false" onAction="#cleanOnAction" text="Clean" />
+                        <MenuItem mnemonicParsing="false" onAction="#deleteOnAction" text="Delete" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
