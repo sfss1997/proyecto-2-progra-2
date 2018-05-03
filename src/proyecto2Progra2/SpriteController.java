@@ -38,6 +38,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -301,5 +302,8 @@ public class SpriteController extends ProyectsAdministration implements Initiali
         this.rowsTextField.setText("");
         this.columnsTextField.setText("");
     }
-
+    @FXML
+    private void about(){
+        JOptionPane.showMessageDialog(null, "Armacabezas\n\nHans Villalobos\nSergio Siles\n\n2018", "Créditos", JOptionPane.INFORMATION_MESSAGE);
+    }
 }

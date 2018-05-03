@@ -25,6 +25,15 @@ import org.json.simple.parser.JSONParser;
  */
 public class ProyectsAdministration {
 
+    /**
+     *
+     * @param name
+     * @param url
+     * @param x
+     * @param y
+     * @param columns
+     * @param rows
+     */
     public void writeJson(String name,ArrayList url,ArrayList x,ArrayList y, int columns, int rows) {
   
         JSONObject obj = new JSONObject();
@@ -65,6 +74,11 @@ public class ProyectsAdministration {
         }
     }
    
+    /**
+     *
+     * @return
+     * @throws Exception
+     */
     public ArrayList readJson() throws Exception{
         
         JSONParser parser = new JSONParser();
