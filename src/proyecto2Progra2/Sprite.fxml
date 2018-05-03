@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="557.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto2Progra2.SpriteController">
+<AnchorPane id="AnchorPane" prefHeight="588.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto2Progra2.SpriteController">
    <children>
-      <VBox prefHeight="557.0" prefWidth="810.0">
+      <VBox prefHeight="599.0" prefWidth="810.0">
          <children>
             <MenuBar>
               <menus>
@@ -29,8 +29,8 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                   <items>
-                    <MenuItem mnemonicParsing="false" onAction="#cleanOnAction" text="Clean" />
-                        <MenuItem mnemonicParsing="false" onAction="#deleteOnAction" text="Delete" />
+                    <MenuItem mnemonicParsing="false" onAction="#cleanOnAction" text="Clean all" />
+                        <MenuItem mnemonicParsing="false" onAction="#deleteOnAction" text="Delete element" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
@@ -40,18 +40,19 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <AnchorPane prefHeight="548.0" prefWidth="810.0">
+            <AnchorPane prefHeight="582.0" prefWidth="810.0">
                <children>
-                  <ScrollPane layoutX="233.0" layoutY="64.0" prefHeight="447.0" prefWidth="552.0">
+                  <ScrollPane layoutX="233.0" layoutY="75.0" prefHeight="485.0" prefWidth="552.0">
                     <content>
-                      <AnchorPane fx:id="spriteAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="448.0" prefWidth="555.0" />
+                      <AnchorPane fx:id="spriteAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="450.0" prefWidth="555.0" />
                     </content>
                   </ScrollPane>
-                  <Button layoutX="233.0" layoutY="23.0" mnemonicParsing="false" onAction="#createGridPane" text="Size" />
-                  <TextField fx:id="rowsTextField" layoutX="282.0" layoutY="23.0" onKeyTyped="#validateOnKeyTyped" prefHeight="25.0" prefWidth="37.0" />
-                  <Label layoutX="327.0" layoutY="27.0" text="x" />
-                  <TextField fx:id="columnsTextField" layoutX="340.0" layoutY="23.0" onKeyTyped="#validateOnKeyTyped" prefHeight="25.0" prefWidth="37.0" />
-                  <ListView fx:id="iconsListView" onMouseClicked="#setSelectedItem" prefHeight="532.0" prefWidth="202.0" style="-fx-cursor: hand;" />
+                  <Button layoutX="233.0" layoutY="36.0" mnemonicParsing="false" onAction="#createGridPane" text="Size" />
+                  <TextField fx:id="rowsTextField" layoutX="280.0" layoutY="36.0" onKeyTyped="#validateOnKeyTyped" prefHeight="25.0" prefWidth="37.0" />
+                  <Label layoutX="328.0" layoutY="40.0" text="x" />
+                  <TextField fx:id="columnsTextField" layoutX="344.0" layoutY="36.0" onKeyTyped="#validateOnKeyTyped" prefHeight="25.0" prefWidth="37.0" />
+                  <ListView fx:id="iconsListView" onMouseClicked="#setSelectedItem" prefHeight="574.0" prefWidth="202.0" style="-fx-cursor: hand;" />
+                  <Label layoutX="280.0" layoutY="14.0" prefHeight="17.0" prefWidth="128.0" text="Rows      |   Columns" />
                </children>
             </AnchorPane>
          </children>
