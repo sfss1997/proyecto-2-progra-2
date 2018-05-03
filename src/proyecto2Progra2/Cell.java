@@ -5,8 +5,8 @@
  */
 package proyecto2Progra2;
 
-import archivos.ArchivosJSON;
-import archivos.ArchivosXML;
+import archivos.ProyectsAdministration;
+import archivos.ImagesAdministration;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,10 +22,10 @@ public class Cell extends Pane {
 
     private ImageView imageView;
     private SpriteController spriteController;
-    private ArchivosXML archivosXML;
+    private ImagesAdministration xmlArchives;
     private int row;
     private int column;
-    private String direction;
+    private String url;
     
     public Cell() {
         try {
@@ -33,8 +33,8 @@ public class Cell extends Pane {
             this.setPrefSize(100, 100);
             this.setOnMouseClicked(e -> handleClick());
             this.spriteController = new SpriteController();
-            this.archivosXML = new ArchivosXML();
-            this.direction = "";
+            this.xmlArchives = new ImagesAdministration();
+            this.url = "";
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(Cell.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -47,11 +47,11 @@ public class Cell extends Pane {
         try {
             String selectedItem = spriteController.getSelectedItem();
             if(!selectedItem.equals("")){
-                for (int i = 0; i < archivosXML.leerXml().size(); i++) {
-                    if(archivosXML.leerXml().get(i).getNombre().equals(selectedItem)){
+                for (int i = 0; i < xmlArchives.readXml().size(); i++) {
+                    if(xmlArchives.readXml().get(i).getName().equals(selectedItem)){
                         this.getChildren().clear();
-                        this.getChildren().add(new ImageView(archivosXML.leerXml().get(i).getDireccion()));
-                        setDirection(archivosXML.leerXml().get(i).getDireccion());
+                        this.getChildren().add(new ImageView(xmlArchives.readXml().get(i).getUrl()));
+                        setUrl(xmlArchives.readXml().get(i).getUrl());
                     }
                 }
             }
@@ -77,12 +77,12 @@ public class Cell extends Pane {
         this.column = column;
     }
 
-    public String getDirection() {
-        return direction;
+    public String getUrl() {
+        return url;
     }
 
-    public void setDirection(String direction) {
-        this.direction = direction;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     

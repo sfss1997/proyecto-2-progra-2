@@ -12,6 +12,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javax.swing.JFileChooser;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -21,10 +23,10 @@ import org.json.simple.parser.JSONParser;
  *
  * @author fabian
  */
-public class ArchivosJSON {
+public class ProyectsAdministration {
 
-    public void escribirJson(String nombre,ArrayList url,ArrayList x,ArrayList y, int columnas, int filas) {
-        System.out.println("llega al escribir json");
+    public void writeJson(String name,ArrayList url,ArrayList x,ArrayList y, int columns, int rows) {
+  
         JSONObject obj = new JSONObject();
         
         
@@ -39,18 +41,19 @@ public class ArchivosJSON {
             listY.add(i,y.get(i));
         }
         
-        obj.put("nombre", nombre);
-        obj.put("columnas",columnas);
-        obj.put("filas", filas);
+        obj.put("name", name);
+        obj.put("columns",columns);
+        obj.put("rows", rows);
         obj.put("url", listUrl);
         obj.put("x", listX);
         obj.put("y", listY);
         
         try {
-            JFileChooser guardarImagen = new JFileChooser();
-            guardarImagen.setApproveButtonText("Guardar");
-            guardarImagen.showSaveDialog(null);
-            FileWriter file = new FileWriter(guardarImagen.getSelectedFile()+".json");
+            JFileChooser  saveImage = new JFileChooser();
+            saveImage.setApproveButtonText("Guardar");
+             saveImage.showSaveDialog(null);
+            
+            FileWriter file = new FileWriter( saveImage.getSelectedFile()+".json");
             file.write(obj.toJSONString());
             file.flush();
             file.close();
@@ -61,34 +64,39 @@ public class ArchivosJSON {
             System.out.print(obj);
         }
     }
-    public ArrayList leerJson() throws Exception{
+   
+    public ArrayList readJson() throws Exception{
         
         JSONParser parser = new JSONParser();
         JFileChooser abrirJson = new JFileChooser();
-            abrirJson.setApproveButtonText("Abrir");
-            abrirJson.setApproveButtonToolTipText("Abrir");
-            abrirJson.setToolTipText("Abrir");
-            abrirJson.showSaveDialog(null);
+       abrirJson.setApproveButtonText("Guardar");
+        abrirJson.showSaveDialog(null);
+//        FileChooser abrirJson = new FileChooser();
+//        abrirJson.getExtensionFilters().addAll(
+//         new ExtensionFilter("JSON", "*.json"));
+        
+          
+//            abrirJson.showSaveDialog(null);
             
-            Object obj = parser.parse(new FileReader(abrirJson.getSelectedFile()+""));
+            Object obj = parser.parse(new FileReader(abrirJson.getSelectedFile()));
             JSONObject jsonObject = (JSONObject) obj;
             
-            String nombre = jsonObject.get("nombre").toString();
-            String columnas =  jsonObject.get("columnas").toString();
-            String filas =   jsonObject.get("filas").toString();
+            String name = jsonObject.get("name").toString();
+            String columns =  jsonObject.get("columns").toString();
+            String rows =   jsonObject.get("rows").toString();
             ArrayList url = (ArrayList) jsonObject.get("url");
             ArrayList x= (ArrayList) jsonObject.get("x");
             ArrayList y = (ArrayList) jsonObject.get("y");
             
-            ArrayList<Object> archivoJson = new ArrayList<>();
+            ArrayList<Object> jsonArchive = new ArrayList<>();
             
-            archivoJson.add(0,nombre);
-            archivoJson.add(1,columnas);
-            archivoJson.add(2,filas);
-            archivoJson.add(3,url);
-            archivoJson.add(4,x);
-            archivoJson.add(5,y);
-        return archivoJson;
+            jsonArchive.add(0,name);
+            jsonArchive.add(1,columns);
+            jsonArchive.add(2,rows);
+            jsonArchive.add(3,url);
+            jsonArchive.add(4,x);
+            jsonArchive.add(5,y);
+        return jsonArchive;
     }
 
 }

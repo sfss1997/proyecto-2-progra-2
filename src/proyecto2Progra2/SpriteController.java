@@ -6,8 +6,8 @@
 package proyecto2Progra2;
 
 import Domain.Logic;
-import archivos.ArchivosJSON;
-import archivos.ArchivosXML;
+import archivos.ProyectsAdministration;
+import archivos.ImagesAdministration;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -45,7 +45,7 @@ import javax.xml.parsers.ParserConfigurationException;
  *
  * @author fabian
  */
-public class SpriteController extends ArchivosJSON implements Initializable {
+public class SpriteController extends ProyectsAdministration implements Initializable {
 
     @FXML
     private AnchorPane spriteAnchorPane;
@@ -60,7 +60,7 @@ public class SpriteController extends ArchivosJSON implements Initializable {
 
     private Cell[][] cell;
     private GridPane spriteGridPane;
-    private ArchivosXML archivosXML;
+    private ImagesAdministration xmlArchives;
     private int rows;
     private int columns;
     private static String selectedItem = "";
@@ -70,7 +70,7 @@ public class SpriteController extends ArchivosJSON implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             // TODO
-            this.archivosXML = new ArchivosXML();
+            this.xmlArchives = new ImagesAdministration();
             this.logic = new Logic();
             initializeListView();
 
@@ -107,15 +107,15 @@ public class SpriteController extends ArchivosJSON implements Initializable {
      * @throws Exception 
      */
     private void initializeListView() throws Exception {
-        Image[] imageList = new Image[this.archivosXML.leerXml().size()];
+        Image[] imageList = new Image[this.xmlArchives.readXml().size()];
         for (int i = 0; i < imageList.length; i++) {
-            Image img = new Image(this.archivosXML.leerXml().get(i).getDireccion());
+            Image img = new Image(this.xmlArchives.readXml().get(i).getUrl());
             imageList[i] = img;
         }
 
         ObservableList<String> items = FXCollections.observableArrayList();
-        for (int i = 0; i < this.archivosXML.leerXml().size(); i++) {
-            items.add(this.archivosXML.leerXml().get(i).getNombre());
+        for (int i = 0; i < this.xmlArchives.readXml().size(); i++) {
+            items.add(this.xmlArchives.readXml().get(i).getName());
         }
 
         this.iconsListView.setItems(items);
@@ -215,7 +215,7 @@ public class SpriteController extends ArchivosJSON implements Initializable {
      */
     @FXML
     private void openProjectOnAction(ActionEvent event) throws Exception {
-        ArrayList document = leerJson();
+        ArrayList document = readJson();
 
         String numberOfColums = document.get(1).toString();
         String NumberOfRows = document.get(2).toString();
@@ -241,7 +241,7 @@ public class SpriteController extends ArchivosJSON implements Initializable {
             for (int j = 0; j < Integer.parseInt(this.columnsTextField.getText()); j++) {
                 if (!url2.get(cont).equals("")) {
                     this.cell[i][j].getChildren().add(new ImageView(url2.get(cont).toString()));
-                    this.cell[i][j].setDirection(url2.get(cont).toString());
+                    this.cell[i][j].setUrl(url2.get(cont).toString());
                 }
                 cont++;
             }
@@ -261,13 +261,13 @@ public class SpriteController extends ArchivosJSON implements Initializable {
         ArrayList<String> y = new ArrayList();
         for (int i = 0; i < this.rows; i++) {
             for (int j = 0; j < this.columns; j++) {
-                url.add(this.cell[i][j].getDirection());
+                url.add(this.cell[i][j].getUrl());
                 x.add(String.valueOf(this.cell[i][j].getRow()));
                 y.add(String.valueOf(this.cell[i][j].getColumn()));
             }
         }
 
-        escribirJson("json", url, x, y, this.columns, this.rows);
+        writeJson("json", url, x, y, this.columns, this.rows);
     }
     
     /**

@@ -5,7 +5,7 @@
  */
 package archivos;
 
-import Domain.Imagenes;
+import Domain.Images;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -33,7 +33,7 @@ import org.xml.sax.SAXException;
  *
  * @author fabian
  */
-public class ArchivosXML {
+public class ImagesAdministration {
     private Document document;
     private Element rootElement;
     
@@ -41,7 +41,7 @@ public class ArchivosXML {
      *
      * @throws ParserConfigurationException
      */
-    public ArchivosXML() throws ParserConfigurationException {
+    public ImagesAdministration() throws ParserConfigurationException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         document = builder.newDocument();
@@ -212,7 +212,7 @@ public class ArchivosXML {
      * @throws IOException
      * @throws TransformerException
      */
-    public void generarXml() throws TransformerConfigurationException, IOException, TransformerException{
+    public void generateXml() throws TransformerConfigurationException, IOException, TransformerException{
         TransformerFactory factory = TransformerFactory.newInstance();
         Transformer transformer = factory.newTransformer();
         
@@ -230,8 +230,8 @@ public class ArchivosXML {
      * @return
      * @throws Exception
      */
-    public ArrayList<Imagenes> leerXml() throws Exception{
-        ArrayList<Imagenes> listaImagenes = new ArrayList<>();
+    public ArrayList<Images> readXml() throws Exception{
+        ArrayList<Images> listaImagenes = new ArrayList<>();
       try {
             File archivo = new File("imagenes.xml");
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -248,10 +248,10 @@ public class ArchivosXML {
 //                    System.out.println("id: " + element.getAttribute("id"));
 //                    System.out.println("Nombre: " + element.getElementsByTagName("nombre").item(0).getTextContent());
 //                    System.out.println("Direccion: " + element.getElementsByTagName("direccion").item(0).getTextContent()+"\n\n");
-                    Imagenes imagenes = new Imagenes();
+                    Images imagenes = new Images();
                     imagenes.setId(Integer.parseInt(element.getAttribute("id")));
-                    imagenes.setNombre((element.getElementsByTagName("nombre").item(0).getTextContent()).toString());
-                    imagenes.setDireccion((element.getElementsByTagName("direccion").item(0).getTextContent()).toString());
+                    imagenes.setName((element.getElementsByTagName("nombre").item(0).getTextContent()).toString());
+                    imagenes.setUrl((element.getElementsByTagName("direccion").item(0).getTextContent()).toString());
                     listaImagenes.add(imagenes);
                 }
             }

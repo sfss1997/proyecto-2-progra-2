@@ -5,15 +5,15 @@
  */
 package proyecto2Progra2;
 
-import archivos.ArchivosXML;
+import archivos.ImagesAdministration;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javax.xml.parsers.ParserConfigurationException;
-import Domain.Imagenes;
-import archivos.ArchivosJSON;
+import Domain.Images;
+import archivos.ProyectsAdministration;
 import java.util.LinkedList;
 import java.util.ArrayList;
 
@@ -43,8 +43,8 @@ public class P extends Application {
         
        
         
-//        ArchivosXML archivosXML = new ArchivosXML();
-//        ArchivosJSON archivosJSON = new ArchivosJSON();
+//        ImagesAdministration archivosXML = new ImagesAdministration();
+//        ProyectsAdministration archivosJSON = new ProyectsAdministration();
 //        archivosXML.generarDocumento();
 //        archivosXML.generarXml();
 //        archivosXML.leerXml();
